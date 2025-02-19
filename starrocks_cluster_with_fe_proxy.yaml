@@ -1,0 +1,54 @@
+# This manifest deploys a StarRocks cluster with FE, BE, FE Proxy
+# To load data from outside the Kubernetes cluster into StarRocks deployed within the Kubernetes
+# cluster, you can deploy the FE Proxy component. So that External data import tools, like flink,
+# can use the STREAM LOAD syntax to import data into StarRocks clusters.
+# see https://docs.starrocks.io/docs/loading/Flink-connector-starrocks/ for more information
+# about how to use flink to import data into StarRocks.
+
+apiVersion: starrocks.com/v1
+kind: StarRocksCluster
+metadata:
+  name: a-starrocks-with-fe-proxy   # change the name if needed.
+  namespace: starrocks
+spec:
+  starRocksFeSpec:
+    image: starrocks/fe-ubuntu:latest
+    replicas: 3
+    limits:
+      cpu: 4
+      memory: 8Gi
+    requests:
+      cpu: 4
+      memory: 8Gi
+    service:
+      type: LoadBalancer   # export fe service
+      ports:
+      - name: query   # fill the name from the fe service ports
+        nodePort: 32755
+        port: 9030
+        containerPort: 9030
+  starRocksBeSpec:
+    image: starrocks/be-ubuntu:latest
+    replicas: 3
+    limits:
+      cpu: 4
+      memory: 8Gi
+    requests:
+      cpu: 4
+      memory: 8Gi
+  starRocksFeProxySpec:
+    replicas: 2
+    limits:
+      cpu: 4
+      memory: 8Gi
+    requests:
+      cpu: 4
+      memory: 8Gi
+    service:
+      type: LoadBalancer   # export fe proxy service
+      ports:
+        - name: http-port   # fill the name from the fe proxy service ports
+          containerPort: 8080
+          nodePort: 30180   # The range of valid ports is 30000-32767
+          port: 8080
+    resolver: "kube-dns.kube-system.svc.cluster.local"  # this is the default dns server.

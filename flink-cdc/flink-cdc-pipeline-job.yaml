@@ -1,0 +1,49 @@
+---
+apiVersion: flink.apache.org/v1beta1
+kind: FlinkDeployment
+metadata:
+  name: flink-cdc-pipeline-job
+  namespace: flinkcdc
+spec:
+  flinkConfiguration:
+    classloader.resolve-order: parent-first
+    state.checkpoints.dir: 'file:///tmp/checkpoints'
+    state.savepoints.dir: 'file:///tmp/savepoints'
+    kubernetes.rest-service.exposed.type: LoadBalancer
+  flinkVersion: v1_18
+  image: '${ECR_ID}:latest'
+  imagePullPolicy: Always
+  job:
+    args:
+      - '--use-mini-cluster'
+      - /opt/flink/flink-cdc-3.3.0/conf/mysql-to-starrocks.yaml
+    entryClass: org.apache.flink.cdc.cli.CliFrontend
+    jarURI: 'local:///opt/flink/lib/flink-cdc-dist-3.3.0.jar'
+    parallelism: 1
+    state: running
+    upgradeMode: savepoint
+  jobManager:
+    replicas: 1
+    resource:
+      cpu: 1
+      memory: 1024m
+  podTemplate:
+    apiVersion: v1
+    kind: Pod
+    spec:
+      containers:
+        # don't modify this name
+        - name: flink-main-container
+          volumeMounts:
+            - mountPath: /opt/flink/flink-cdc-3.3.0/conf
+              name: flink-cdc-pipeline-config
+      volumes:
+        - configMap:
+            name: flink-cdc-pipeline-configmap
+          name: flink-cdc-pipeline-config
+  restartNonce: 0
+  serviceAccount: flink
+  taskManager:
+    resource:
+      cpu: 1
+      memory: 1024m

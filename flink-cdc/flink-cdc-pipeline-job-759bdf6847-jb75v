@@ -1,0 +1,589 @@
+/opt/flink/bin/config-parser-utils.sh: line 45: /opt/flink/conf/flink-conf.yaml: Read-only file system
+Starting kubernetes-application as a console application on host flink-cdc-pipeline-job-759bdf6847-jb75v.
+2025-02-18 15:56:21,417 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] - --------------------------------------------------------------------------------
+2025-02-18 15:56:21,419 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -  Preconfiguration: 
+2025-02-18 15:56:21,419 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] - 
+
+
+RESOURCE_PARAMS extraction logs:
+jvm_params: -Xmx469762048 -Xms469762048 -XX:MaxMetaspaceSize=268435456
+dynamic_configs: -D jobmanager.memory.off-heap.size=134217728b -D jobmanager.memory.jvm-overhead.min=201326592b -D jobmanager.memory.jvm-metaspace.size=268435456b -D jobmanager.memory.heap.size=469762048b -D jobmanager.memory.jvm-overhead.max=201326592b
+logs: INFO  [] - Using legacy YAML parser to load flink configuration file from /opt/flink/conf/flink-conf.yaml.
+INFO  [] - Loading configuration property: blob.server.port, 6124
+INFO  [] - Loading configuration property: kubernetes.jobmanager.annotations, flinkdeployment.flink.apache.org/generation:2
+INFO  [] - Loading configuration property: kubernetes.jobmanager.replicas, 1
+INFO  [] - Loading configuration property: jobmanager.rpc.address, flink-cdc-pipeline-job.flinkcdc
+INFO  [] - Loading configuration property: state.savepoints.dir, file:///tmp/savepoints
+INFO  [] - Loading configuration property: kubernetes.service-account, flink
+INFO  [] - Loading configuration property: kubernetes.cluster-id, flink-cdc-pipeline-job
+INFO  [] - Loading configuration property: kubernetes.taskmanager.cpu.amount, 1.0
+INFO  [] - Loading configuration property: $internal.application.program-args, --use-mini-cluster;/opt/flink/flink-cdc-3.3.0/conf/mysql-to-starrocks.yaml
+INFO  [] - Loading configuration property: parallelism.default, 1
+INFO  [] - Loading configuration property: kubernetes.namespace, flinkcdc
+INFO  [] - Loading configuration property: taskmanager.numberOfTaskSlots, 1
+INFO  [] - Loading configuration property: kubernetes.rest-service.exposed.type, LoadBalancer
+INFO  [] - Loading configuration property: kubernetes.jobmanager.owner.reference, kind:FlinkDeployment,apiVersion:flink.apache.org/v1beta1,blockOwnerDeletion:true,controller:false,name:flink-cdc-pipeline-job,uid:46a119e6-c12c-4150-8342-ae909cd24df3
+INFO  [] - Loading configuration property: kubernetes.container.image.ref, 436103886277.dkr.ecr.us-east-1.amazonaws.com/flink-cdc-pipeline:latest
+INFO  [] - Loading configuration property: $internal.application.main, org.apache.flink.cdc.cli.CliFrontend
+INFO  [] - Loading configuration property: taskmanager.memory.process.size, 1 gb
+INFO  [] - Loading configuration property: kubernetes.internal.jobmanager.entrypoint.class, org.apache.flink.kubernetes.entrypoint.KubernetesApplicationClusterEntrypoint
+INFO  [] - Loading configuration property: pipeline.name, flink-cdc-pipeline-job
+INFO  [] - Loading configuration property: classloader.resolve-order, parent-first
+INFO  [] - Loading configuration property: kubernetes.pod-template-file.taskmanager, /tmp/flink_op_generated_podTemplate_15732383243582051052.yaml
+INFO  [] - Loading configuration property: web.cancel.enable, false
+INFO  [] - Loading configuration property: execution.target, kubernetes-application
+INFO  [] - Loading configuration property: execution.shutdown-on-application-finish, false
+INFO  [] - Loading configuration property: jobmanager.memory.process.size, 1 gb
+INFO  [] - Loading configuration property: taskmanager.rpc.port, 6122
+INFO  [] - Loading configuration property: kubernetes.container.image.pull-policy, Always
+INFO  [] - Loading configuration property: kubernetes.jobmanager.cpu.amount, 1.0
+INFO  [] - Loading configuration property: internal.cluster.execution-mode, NORMAL
+INFO  [] - Loading configuration property: $internal.pipeline.job-id, e132332cb44bbd5b05b66273017b7ea5
+INFO  [] - Loading configuration property: execution.checkpointing.externalized-checkpoint-retention, RETAIN_ON_CANCELLATION
+INFO  [] - Loading configuration property: pipeline.jars, local:///opt/flink/lib/flink-cdc-dist-3.3.0.jar
+INFO  [] - Loading configuration property: $internal.flink.version, v1_18
+INFO  [] - Loading configuration property: kubernetes.pod-template-file.jobmanager, /tmp/flink_op_generated_podTemplate_16018328189101924972.yaml
+INFO  [] - Loading configuration property: state.checkpoints.dir, file:///tmp/checkpoints
+INFO  [] - The derived from fraction jvm overhead memory (102.400mb (107374184 bytes)) is less than its min value 192.000mb (201326592 bytes), min value will be used instead
+INFO  [] - Final Master Memory configuration:
+INFO  [] -   Total Process Memory: 1024.000mb (1073741824 bytes)
+INFO  [] -     Total Flink Memory: 576.000mb (603979776 bytes)
+INFO  [] -       JVM Heap:         448.000mb (469762048 bytes)
+INFO  [] -       Off-heap:         128.000mb (134217728 bytes)
+INFO  [] -     JVM Metaspace:      256.000mb (268435456 bytes)
+INFO  [] -     JVM Overhead:       192.000mb (201326592 bytes)
+
+2025-02-18 15:56:21,419 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] - --------------------------------------------------------------------------------
+2025-02-18 15:56:21,419 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -  Starting KubernetesApplicationClusterEntrypoint (Version: 1.19.1, Scala: 2.12, Rev:5edb5a9, Date:2024-06-06T14:45:33+02:00)
+2025-02-18 15:56:21,420 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -  OS current user: flink
+2025-02-18 15:56:21,420 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -  Current Hadoop/Kerberos user: <no hadoop dependency found>
+2025-02-18 15:56:21,420 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -  JVM: OpenJDK 64-Bit Server VM - Temurin - 1.8/25.442-b06
+2025-02-18 15:56:21,420 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -  Arch: amd64
+2025-02-18 15:56:21,420 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -  Maximum heap size: 433 MiBytes
+2025-02-18 15:56:21,420 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -  JAVA_HOME: /opt/java/openjdk
+2025-02-18 15:56:21,420 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -  No Hadoop Dependency available
+2025-02-18 15:56:21,420 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -  JVM Options:
+2025-02-18 15:56:21,420 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     -Xmx469762048
+2025-02-18 15:56:21,420 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     -Xms469762048
+2025-02-18 15:56:21,420 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     -XX:MaxMetaspaceSize=268435456
+2025-02-18 15:56:21,421 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     -XX:+IgnoreUnrecognizedVMOptions
+2025-02-18 15:56:21,421 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     -Dlog.file=/opt/flink/log/flink--kubernetes-application-0-flink-cdc-pipeline-job-759bdf6847-jb75v.log
+2025-02-18 15:56:21,421 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     -Dlog4j.configuration=file:/opt/flink/conf/log4j-console.properties
+2025-02-18 15:56:21,421 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     -Dlog4j.configurationFile=file:/opt/flink/conf/log4j-console.properties
+2025-02-18 15:56:21,421 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     -Dlogback.configurationFile=file:/opt/flink/conf/logback-console.xml
+2025-02-18 15:56:21,421 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -  Program Arguments:
+2025-02-18 15:56:21,421 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     -D
+2025-02-18 15:56:21,421 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     jobmanager.memory.off-heap.size=134217728b
+2025-02-18 15:56:21,422 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     -D
+2025-02-18 15:56:21,422 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     jobmanager.memory.jvm-overhead.min=201326592b
+2025-02-18 15:56:21,422 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     -D
+2025-02-18 15:56:21,422 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     jobmanager.memory.jvm-metaspace.size=268435456b
+2025-02-18 15:56:21,422 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     -D
+2025-02-18 15:56:21,422 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     jobmanager.memory.heap.size=469762048b
+2025-02-18 15:56:21,422 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     -D
+2025-02-18 15:56:21,422 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -     jobmanager.memory.jvm-overhead.max=201326592b
+2025-02-18 15:56:21,422 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] -  Classpath: /opt/flink/lib/flink-cdc-dist-3.3.0.jar:/opt/flink/lib/flink-cdc-pipeline-connector-mysql-3.3.0.jar:/opt/flink/lib/flink-cdc-pipeline-connector-starrocks-3.3.0.jar:/opt/flink/lib/flink-cep-1.19.1.jar:/opt/flink/lib/flink-connector-files-1.19.1.jar:/opt/flink/lib/flink-csv-1.19.1.jar:/opt/flink/lib/flink-json-1.19.1.jar:/opt/flink/lib/flink-scala_2.12-1.19.1.jar:/opt/flink/lib/flink-table-api-java-uber-1.19.1.jar:/opt/flink/lib/flink-table-planner-loader-1.19.1.jar:/opt/flink/lib/flink-table-runtime-1.19.1.jar:/opt/flink/lib/log4j-1.2-api-2.17.1.jar:/opt/flink/lib/log4j-api-2.17.1.jar:/opt/flink/lib/log4j-core-2.17.1.jar:/opt/flink/lib/log4j-slf4j-impl-2.17.1.jar:/opt/flink/lib/mysql-connector-java-8.0.27.jar:/opt/flink/lib/flink-dist-1.19.1.jar::::
+2025-02-18 15:56:21,422 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] - --------------------------------------------------------------------------------
+2025-02-18 15:56:21,423 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] - Registered UNIX signal handlers for [TERM, HUP, INT]
+2025-02-18 15:56:21,430 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Using legacy YAML parser to load flink configuration file from /opt/flink/conf/flink-conf.yaml.
+2025-02-18 15:56:21,431 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: blob.server.port, 6124
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.jobmanager.annotations, flinkdeployment.flink.apache.org/generation:2
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.jobmanager.replicas, 1
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: jobmanager.rpc.address, flink-cdc-pipeline-job.flinkcdc
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: state.savepoints.dir, file:///tmp/savepoints
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.service-account, flink
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.cluster-id, flink-cdc-pipeline-job
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.taskmanager.cpu.amount, 1.0
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: $internal.application.program-args, --use-mini-cluster;/opt/flink/flink-cdc-3.3.0/conf/mysql-to-starrocks.yaml
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: parallelism.default, 1
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.namespace, flinkcdc
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: taskmanager.numberOfTaskSlots, 1
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.rest-service.exposed.type, LoadBalancer
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.jobmanager.owner.reference, kind:FlinkDeployment,apiVersion:flink.apache.org/v1beta1,blockOwnerDeletion:true,controller:false,name:flink-cdc-pipeline-job,uid:46a119e6-c12c-4150-8342-ae909cd24df3
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.container.image.ref, 436103886277.dkr.ecr.us-east-1.amazonaws.com/flink-cdc-pipeline:latest
+2025-02-18 15:56:21,432 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: $internal.application.main, org.apache.flink.cdc.cli.CliFrontend
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: taskmanager.memory.process.size, 1 gb
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.internal.jobmanager.entrypoint.class, org.apache.flink.kubernetes.entrypoint.KubernetesApplicationClusterEntrypoint
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: pipeline.name, flink-cdc-pipeline-job
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: classloader.resolve-order, parent-first
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.pod-template-file.taskmanager, /tmp/flink_op_generated_podTemplate_15732383243582051052.yaml
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: web.cancel.enable, false
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: execution.target, kubernetes-application
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: execution.shutdown-on-application-finish, false
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: jobmanager.memory.process.size, 1 gb
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: taskmanager.rpc.port, 6122
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.container.image.pull-policy, Always
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.jobmanager.cpu.amount, 1.0
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: internal.cluster.execution-mode, NORMAL
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: $internal.pipeline.job-id, e132332cb44bbd5b05b66273017b7ea5
+2025-02-18 15:56:21,433 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: execution.checkpointing.externalized-checkpoint-retention, RETAIN_ON_CANCELLATION
+2025-02-18 15:56:21,434 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: pipeline.jars, local:///opt/flink/lib/flink-cdc-dist-3.3.0.jar
+2025-02-18 15:56:21,434 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: $internal.flink.version, v1_18
+2025-02-18 15:56:21,434 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.pod-template-file.jobmanager, /tmp/flink_op_generated_podTemplate_16018328189101924972.yaml
+2025-02-18 15:56:21,434 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: state.checkpoints.dir, file:///tmp/checkpoints
+2025-02-18 15:56:21,434 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading dynamic configuration property: jobmanager.memory.off-heap.size, 134217728b
+2025-02-18 15:56:21,434 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading dynamic configuration property: jobmanager.memory.jvm-overhead.min, 201326592b
+2025-02-18 15:56:21,434 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading dynamic configuration property: jobmanager.memory.jvm-metaspace.size, 268435456b
+2025-02-18 15:56:21,434 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading dynamic configuration property: jobmanager.memory.heap.size, 469762048b
+2025-02-18 15:56:21,434 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading dynamic configuration property: jobmanager.memory.jvm-overhead.max, 201326592b
+2025-02-18 15:56:21,616 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] - Install default filesystem for fetching user artifacts in Kubernetes Application Mode.
+2025-02-18 15:56:21,618 INFO  org.apache.flink.core.fs.FileSystem                          [] - Hadoop is not in the classpath/dependencies. The extended set of supported File Systems via Hadoop is not available.
+2025-02-18 15:56:21,629 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: external-resource-gpu
+2025-02-18 15:56:21,630 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-datadog
+2025-02-18 15:56:21,630 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-graphite
+2025-02-18 15:56:21,630 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-influx
+2025-02-18 15:56:21,630 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-jmx
+2025-02-18 15:56:21,631 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-prometheus
+2025-02-18 15:56:21,631 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-slf4j
+2025-02-18 15:56:21,631 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-statsd
+2025-02-18 15:56:21,639 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] - Install security context.
+2025-02-18 15:56:21,647 INFO  org.apache.flink.runtime.security.modules.HadoopModuleFactory [] - Cannot create Hadoop Security Module because Hadoop cannot be found in the Classpath.
+2025-02-18 15:56:21,653 INFO  org.apache.flink.runtime.security.modules.JaasModule         [] - Jaas file will be created as /tmp/jaas-5901678722703487036.conf.
+2025-02-18 15:56:21,656 INFO  org.apache.flink.runtime.security.contexts.HadoopSecurityContextFactory [] - Cannot install HadoopSecurityContext because Hadoop cannot be found in the Classpath.
+2025-02-18 15:56:21,706 INFO  org.apache.flink.client.program.artifact.ArtifactUtils       [] - Created parents for base dir: /opt/flink/artifacts/flinkcdc/flink-cdc-pipeline-job
+2025-02-18 15:56:21,736 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] - Starting KubernetesApplicationClusterEntrypoint.
+2025-02-18 15:56:21,739 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] - Install default filesystem.
+2025-02-18 15:56:21,739 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: external-resource-gpu
+2025-02-18 15:56:21,740 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-datadog
+2025-02-18 15:56:21,740 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-graphite
+2025-02-18 15:56:21,740 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-influx
+2025-02-18 15:56:21,740 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-jmx
+2025-02-18 15:56:21,740 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-prometheus
+2025-02-18 15:56:21,740 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-slf4j
+2025-02-18 15:56:21,740 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID not found, creating it: metrics-statsd
+2025-02-18 15:56:21,741 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] - Install security context.
+2025-02-18 15:56:21,741 INFO  org.apache.flink.runtime.security.modules.HadoopModuleFactory [] - Cannot create Hadoop Security Module because Hadoop cannot be found in the Classpath.
+2025-02-18 15:56:21,742 INFO  org.apache.flink.runtime.security.contexts.HadoopSecurityContextFactory [] - Cannot install HadoopSecurityContext because Hadoop cannot be found in the Classpath.
+2025-02-18 15:56:21,743 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] - Initializing cluster services.
+2025-02-18 15:56:21,747 INFO  org.apache.flink.runtime.entrypoint.ClusterEntrypoint        [] - Using working directory: WorkingDirectory(/tmp/jm_7f34f99e41e9f72cdd29fac92191f8cc).
+2025-02-18 15:56:22,056 INFO  org.apache.flink.runtime.rpc.pekko.PekkoRpcServiceUtils      [] - Trying to start actor system, external address flink-cdc-pipeline-job.flinkcdc:6123, bind address 0.0.0.0:6123.
+2025-02-18 15:56:22,717 INFO  org.apache.pekko.event.slf4j.Slf4jLogger                     [] - Slf4jLogger started
+2025-02-18 15:56:22,732 INFO  org.apache.pekko.remote.RemoteActorRefProvider               [] - Pekko Cluster not in use - enabling unsafe features anyway because `pekko.remote.use-unsafe-remote-features-outside-cluster` has been enabled.
+2025-02-18 15:56:22,732 INFO  org.apache.pekko.remote.Remoting                             [] - Starting remoting
+2025-02-18 15:56:22,907 INFO  org.apache.pekko.remote.Remoting                             [] - Remoting started; listening on addresses :[pekko.tcp://flink@flink-cdc-pipeline-job.flinkcdc:6123]
+2025-02-18 15:56:23,044 INFO  org.apache.flink.runtime.rpc.pekko.PekkoRpcServiceUtils      [] - Actor system started at pekko.tcp://flink@flink-cdc-pipeline-job.flinkcdc:6123
+2025-02-18 15:56:23,106 INFO  org.apache.flink.runtime.security.token.DefaultDelegationTokenManager [] - Loading delegation token providers
+2025-02-18 15:56:23,108 INFO  org.apache.flink.runtime.security.token.hadoop.HadoopFSDelegationTokenProvider [] - Hadoop FS is not available (not packaged with this application): NoClassDefFoundError : "org/apache/hadoop/conf/Configuration".
+2025-02-18 15:56:23,108 INFO  org.apache.flink.runtime.security.token.DefaultDelegationTokenManager [] - Delegation token provider hadoopfs loaded and initialized
+2025-02-18 15:56:23,109 INFO  org.apache.flink.runtime.security.token.DefaultDelegationTokenManager [] - Delegation token provider hbase loaded and initialized
+2025-02-18 15:56:23,109 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: external-resource-gpu
+2025-02-18 15:56:23,109 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-datadog
+2025-02-18 15:56:23,109 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-graphite
+2025-02-18 15:56:23,109 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-influx
+2025-02-18 15:56:23,109 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-jmx
+2025-02-18 15:56:23,109 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-prometheus
+2025-02-18 15:56:23,109 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-slf4j
+2025-02-18 15:56:23,109 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-statsd
+2025-02-18 15:56:23,109 INFO  org.apache.flink.runtime.security.token.DefaultDelegationTokenManager [] - Delegation token providers loaded successfully
+2025-02-18 15:56:23,110 INFO  org.apache.flink.runtime.security.token.DelegationTokenReceiverRepository [] - Loading delegation token receivers
+2025-02-18 15:56:23,111 INFO  org.apache.flink.runtime.security.token.DelegationTokenReceiverRepository [] - Delegation token receiver hadoopfs loaded and initialized
+2025-02-18 15:56:23,111 INFO  org.apache.flink.runtime.security.token.DelegationTokenReceiverRepository [] - Delegation token receiver hbase loaded and initialized
+2025-02-18 15:56:23,111 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: external-resource-gpu
+2025-02-18 15:56:23,111 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-datadog
+2025-02-18 15:56:23,111 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-graphite
+2025-02-18 15:56:23,111 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-influx
+2025-02-18 15:56:23,111 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-jmx
+2025-02-18 15:56:23,111 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-prometheus
+2025-02-18 15:56:23,111 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-slf4j
+2025-02-18 15:56:23,111 INFO  org.apache.flink.core.plugin.DefaultPluginManager            [] - Plugin loader with ID found, reusing it: metrics-statsd
+2025-02-18 15:56:23,111 INFO  org.apache.flink.runtime.security.token.DelegationTokenReceiverRepository [] - Delegation token receivers loaded successfully
+2025-02-18 15:56:23,112 INFO  org.apache.flink.runtime.security.token.DefaultDelegationTokenManager [] - Checking provider and receiver instances consistency
+2025-02-18 15:56:23,112 INFO  org.apache.flink.runtime.security.token.DefaultDelegationTokenManager [] - Provider and receiver instances are consistent
+2025-02-18 15:56:23,112 INFO  org.apache.flink.runtime.security.token.DefaultDelegationTokenManager [] - Obtaining delegation tokens
+2025-02-18 15:56:23,113 INFO  org.apache.flink.runtime.security.token.DefaultDelegationTokenManager [] - Delegation tokens obtained successfully
+2025-02-18 15:56:23,113 WARN  org.apache.flink.runtime.security.token.DefaultDelegationTokenManager [] - No tokens obtained so skipping notifications
+2025-02-18 15:56:23,120 INFO  org.apache.flink.configuration.Configuration                 [] - Config uses fallback configuration key 'jobmanager.rpc.address' instead of key 'rest.address'
+2025-02-18 15:56:23,125 INFO  org.apache.flink.runtime.blob.BlobServer                     [] - Created BLOB server storage directory /tmp/jm_7f34f99e41e9f72cdd29fac92191f8cc/blobStorage
+2025-02-18 15:56:23,126 INFO  org.apache.flink.runtime.blob.BlobServer                     [] - Started BLOB server at 0.0.0.0:6124 - max concurrent requests: 50 - max backlog: 1000
+2025-02-18 15:56:23,137 INFO  org.apache.flink.runtime.metrics.MetricRegistryImpl          [] - No metrics reporter configured, no metrics will be exposed/reported.
+2025-02-18 15:56:23,137 INFO  org.apache.flink.runtime.metrics.MetricRegistryImpl          [] - No trace reporter configured, no metrics will be exposed/reported.
+2025-02-18 15:56:23,139 INFO  org.apache.flink.runtime.rpc.pekko.PekkoRpcServiceUtils      [] - Trying to start actor system, external address flink-cdc-pipeline-job.flinkcdc:0, bind address 0.0.0.0:0.
+2025-02-18 15:56:23,207 INFO  org.apache.pekko.event.slf4j.Slf4jLogger                     [] - Slf4jLogger started
+2025-02-18 15:56:23,209 INFO  org.apache.pekko.remote.RemoteActorRefProvider               [] - Pekko Cluster not in use - enabling unsafe features anyway because `pekko.remote.use-unsafe-remote-features-outside-cluster` has been enabled.
+2025-02-18 15:56:23,209 INFO  org.apache.pekko.remote.Remoting                             [] - Starting remoting
+2025-02-18 15:56:23,213 INFO  org.apache.pekko.remote.Remoting                             [] - Remoting started; listening on addresses :[pekko.tcp://flink-metrics@flink-cdc-pipeline-job.flinkcdc:35831]
+2025-02-18 15:56:23,218 INFO  org.apache.flink.runtime.rpc.pekko.PekkoRpcServiceUtils      [] - Actor system started at pekko.tcp://flink-metrics@flink-cdc-pipeline-job.flinkcdc:35831
+2025-02-18 15:56:23,225 INFO  org.apache.flink.runtime.rpc.pekko.PekkoRpcService           [] - Starting RPC endpoint for org.apache.flink.runtime.metrics.dump.MetricQueryService at pekko://flink-metrics/user/rpc/MetricQueryService .
+2025-02-18 15:56:23,321 INFO  org.apache.flink.configuration.Configuration                 [] - Config uses fallback configuration key 'jobmanager.rpc.address' instead of key 'rest.address'
+2025-02-18 15:56:23,335 INFO  org.apache.flink.runtime.jobmaster.MiniDispatcherRestEndpoint [] - Upload directory /tmp/flink-web-9cf725e3-90d1-4221-89fb-f01525018be4/flink-web-upload does not exist. 
+2025-02-18 15:56:23,336 INFO  org.apache.flink.runtime.jobmaster.MiniDispatcherRestEndpoint [] - Created directory /tmp/flink-web-9cf725e3-90d1-4221-89fb-f01525018be4/flink-web-upload for file uploads.
+2025-02-18 15:56:23,337 INFO  org.apache.flink.runtime.jobmaster.MiniDispatcherRestEndpoint [] - Starting rest endpoint.
+2025-02-18 15:56:23,509 INFO  org.apache.flink.runtime.webmonitor.WebMonitorUtils          [] - Determined location of main cluster component log file: /opt/flink/log/flink--kubernetes-application-0-flink-cdc-pipeline-job-759bdf6847-jb75v.log
+2025-02-18 15:56:23,509 INFO  org.apache.flink.runtime.webmonitor.WebMonitorUtils          [] - Determined location of main cluster component stdout file: /opt/flink/log/flink--kubernetes-application-0-flink-cdc-pipeline-job-759bdf6847-jb75v.out
+2025-02-18 15:56:23,632 INFO  org.apache.flink.runtime.jobmaster.MiniDispatcherRestEndpoint [] - Rest endpoint listening at flink-cdc-pipeline-job.flinkcdc:8081
+2025-02-18 15:56:23,632 INFO  org.apache.flink.runtime.jobmaster.MiniDispatcherRestEndpoint [] - http://flink-cdc-pipeline-job.flinkcdc:8081 was granted leadership with leaderSessionID=00000000-0000-0000-0000-000000000000
+2025-02-18 15:56:23,633 INFO  org.apache.flink.runtime.jobmaster.MiniDispatcherRestEndpoint [] - Web frontend listening at http://flink-cdc-pipeline-job.flinkcdc:8081.
+2025-02-18 15:56:23,641 INFO  org.apache.flink.runtime.util.config.memory.ProcessMemoryUtils [] - The derived from fraction jvm overhead memory (102.400mb (107374184 bytes)) is less than its min value 192.000mb (201326592 bytes), min value will be used instead
+2025-02-18 15:56:23,642 INFO  org.apache.flink.runtime.util.config.memory.ProcessMemoryUtils [] - The derived from fraction network memory (57.600mb (60397978 bytes)) is less than its min value 64.000mb (67108864 bytes), min value will be used instead
+2025-02-18 15:56:23,648 WARN  org.apache.flink.kubernetes.entrypoint.KubernetesResourceManagerFactory [] - Configured size for 'taskmanager.memory.process.size' is ignored. Total memory size for TaskManagers are dynamically decided in fine-grained resource management.
+2025-02-18 15:56:23,705 INFO  org.apache.flink.runtime.dispatcher.runner.DefaultDispatcherRunner [] - DefaultDispatcherRunner was granted leadership with leader id 00000000-0000-0000-0000-000000000000. Creating new DispatcherLeaderProcess.
+2025-02-18 15:56:23,708 INFO  org.apache.flink.runtime.dispatcher.runner.SessionDispatcherLeaderProcess [] - Start SessionDispatcherLeaderProcess.
+2025-02-18 15:56:23,709 INFO  org.apache.flink.runtime.resourcemanager.ResourceManagerServiceImpl [] - Starting resource manager service.
+2025-02-18 15:56:23,709 INFO  org.apache.flink.runtime.resourcemanager.ResourceManagerServiceImpl [] - Resource manager service is granted leadership with session id 00000000-0000-0000-0000-000000000000.
+2025-02-18 15:56:23,711 INFO  org.apache.flink.runtime.dispatcher.runner.SessionDispatcherLeaderProcess [] - Recover all persisted job graphs that are not finished, yet.
+2025-02-18 15:56:23,711 INFO  org.apache.flink.runtime.dispatcher.runner.SessionDispatcherLeaderProcess [] - Successfully recovered 0 persisted job graphs.
+2025-02-18 15:56:23,721 INFO  org.apache.flink.runtime.rpc.pekko.PekkoRpcService           [] - Starting RPC endpoint for org.apache.flink.runtime.dispatcher.StandaloneDispatcher at pekko://flink/user/rpc/dispatcher_0 .
+2025-02-18 15:56:23,812 INFO  org.apache.flink.client.ClientUtils                          [] - Starting program (detached: true)
+2025-02-18 15:56:23,826 INFO  org.apache.flink.cdc.cli.CliFrontend                         [] - Real Path pipelineDefPath /opt/flink/flink-cdc-3.3.0/conf/mysql-to-starrocks.yaml
+2025-02-18 15:56:23,826 WARN  org.apache.flink.cdc.cli.CliFrontend                         [] - Cannot find global configuration in command-line or FLINK_CDC_HOME. Will use empty global configuration.
+2025-02-18 15:56:23,928 INFO  org.apache.flink.cdc.cli.CliFrontend                         [] - Dynamic flink config items found: {}
+2025-02-18 15:56:24,130 INFO  org.apache.flink.cdc.composer.flink.FlinkEnvironmentUtils    [] - pipeline.jars is file:/opt/flink/lib/flink-cdc-dist-3.3.0.jar,file:/opt/flink/lib/flink-cdc-pipeline-connector-mysql-3.3.0.jar
+2025-02-18 15:56:24,208 INFO  org.apache.flink.cdc.connectors.mysql.utils.OptionUtils      [] - Print mysql connector configuration:
+2025-02-18 15:56:24,209 INFO  org.apache.flink.cdc.connectors.mysql.utils.OptionUtils      [] - hostname = starrocksoneksstack-auroraclusterwriter499c523e-j14pqplkonb8.co2wcr3kjcuz.us-east-1.rds.amazonaws.com
+2025-02-18 15:56:24,209 INFO  org.apache.flink.cdc.connectors.mysql.utils.OptionUtils      [] - password = ******
+2025-02-18 15:56:24,209 INFO  org.apache.flink.cdc.connectors.mysql.utils.OptionUtils      [] - tables = workshop_db .\.*
+2025-02-18 15:56:24,209 INFO  org.apache.flink.cdc.connectors.mysql.utils.OptionUtils      [] - port = 3306
+2025-02-18 15:56:24,209 INFO  org.apache.flink.cdc.connectors.mysql.utils.OptionUtils      [] - server-time-zone = UTC
+2025-02-18 15:56:24,209 INFO  org.apache.flink.cdc.connectors.mysql.utils.OptionUtils      [] - username = admin
+2025-02-18 15:56:24,209 INFO  org.apache.flink.cdc.connectors.mysql.utils.OptionUtils      [] - server-id = 5400-5404
+2025-02-18 15:56:24,432 WARN  io.debezium.connector.mysql.MySqlConnection                  [] - Database configuration option 'serverTimezone' is set but is obsolete, please use 'connectionTimeZone' instead
+2025-02-18 15:56:24,518 INFO  org.apache.flink.cdc.connectors.mysql.utils.MySqlSchemaUtils [] - Read list of available databases
+2025-02-18 15:56:24,927 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Using legacy YAML parser to load flink configuration file from /opt/flink/conf/flink-conf.yaml.
+2025-02-18 15:56:24,927 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: blob.server.port, 6124
+2025-02-18 15:56:24,927 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.jobmanager.annotations, flinkdeployment.flink.apache.org/generation:2
+2025-02-18 15:56:24,927 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.jobmanager.replicas, 1
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: jobmanager.rpc.address, flink-cdc-pipeline-job.flinkcdc
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: state.savepoints.dir, file:///tmp/savepoints
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.service-account, flink
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.cluster-id, flink-cdc-pipeline-job
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.taskmanager.cpu.amount, 1.0
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: $internal.application.program-args, --use-mini-cluster;/opt/flink/flink-cdc-3.3.0/conf/mysql-to-starrocks.yaml
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: parallelism.default, 1
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.namespace, flinkcdc
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: taskmanager.numberOfTaskSlots, 1
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.rest-service.exposed.type, LoadBalancer
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.jobmanager.owner.reference, kind:FlinkDeployment,apiVersion:flink.apache.org/v1beta1,blockOwnerDeletion:true,controller:false,name:flink-cdc-pipeline-job,uid:46a119e6-c12c-4150-8342-ae909cd24df3
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.container.image.ref, 436103886277.dkr.ecr.us-east-1.amazonaws.com/flink-cdc-pipeline:latest
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: $internal.application.main, org.apache.flink.cdc.cli.CliFrontend
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: taskmanager.memory.process.size, 1 gb
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.internal.jobmanager.entrypoint.class, org.apache.flink.kubernetes.entrypoint.KubernetesApplicationClusterEntrypoint
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: pipeline.name, flink-cdc-pipeline-job
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: classloader.resolve-order, parent-first
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.pod-template-file.taskmanager, /tmp/flink_op_generated_podTemplate_15732383243582051052.yaml
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: web.cancel.enable, false
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: execution.target, kubernetes-application
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: execution.shutdown-on-application-finish, false
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: jobmanager.memory.process.size, 1 gb
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: taskmanager.rpc.port, 6122
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.container.image.pull-policy, Always
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.jobmanager.cpu.amount, 1.0
+2025-02-18 15:56:24,928 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: internal.cluster.execution-mode, NORMAL
+2025-02-18 15:56:24,929 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: $internal.pipeline.job-id, e132332cb44bbd5b05b66273017b7ea5
+2025-02-18 15:56:24,929 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: execution.checkpointing.externalized-checkpoint-retention, RETAIN_ON_CANCELLATION
+2025-02-18 15:56:24,929 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: pipeline.jars, local:///opt/flink/lib/flink-cdc-dist-3.3.0.jar
+2025-02-18 15:56:24,929 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: $internal.flink.version, v1_18
+2025-02-18 15:56:24,929 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: kubernetes.pod-template-file.jobmanager, /tmp/flink_op_generated_podTemplate_16018328189101924972.yaml
+2025-02-18 15:56:24,929 INFO  org.apache.flink.configuration.GlobalConfiguration           [] - Loading configuration property: state.checkpoints.dir, file:///tmp/checkpoints
+2025-02-18 15:56:25,004 INFO  org.apache.flink.runtime.rpc.pekko.PekkoRpcService           [] - Starting RPC endpoint for org.apache.flink.runtime.resourcemanager.active.ActiveResourceManager at pekko://flink/user/rpc/resourcemanager_1 .
+2025-02-18 15:56:25,010 INFO  org.apache.flink.runtime.resourcemanager.active.ActiveResourceManager [] - Starting the resource manager.
+2025-02-18 15:56:25,014 INFO  org.apache.flink.runtime.resourcemanager.slotmanager.FineGrainedSlotManager [] - Starting the slot manager.
+2025-02-18 15:56:25,015 INFO  org.apache.flink.runtime.security.token.DefaultDelegationTokenManager [] - Starting tokens update task
+2025-02-18 15:56:25,015 WARN  org.apache.flink.runtime.security.token.DefaultDelegationTokenManager [] - No tokens obtained so skipping notifications
+2025-02-18 15:56:25,015 WARN  org.apache.flink.runtime.security.token.DefaultDelegationTokenManager [] - Tokens update task not started because either no tokens obtained or none of the tokens specified its renewal date
+2025-02-18 15:56:25,138 INFO  org.apache.flink.cdc.connectors.mysql.utils.MySqlSchemaUtils [] - 	 list of available databases are: [workshop_db]
+2025-02-18 15:56:25,138 INFO  org.apache.flink.cdc.connectors.mysql.utils.MySqlSchemaUtils [] - Read list of available tables in workshop_db
+2025-02-18 15:56:25,160 INFO  org.apache.flink.cdc.connectors.mysql.utils.MySqlSchemaUtils [] - 	 list of available tables are: [workshop_db.events]
+2025-02-18 15:56:25,206 INFO  io.debezium.jdbc.JdbcConnection                              [] - Connection gracefully closed
+2025-02-18 15:56:25,212 INFO  org.apache.flink.cdc.composer.flink.FlinkEnvironmentUtils    [] - pipeline.jars is file:/opt/flink/lib/flink-cdc-dist-3.3.0.jar,file:/opt/flink/lib/flink-cdc-pipeline-connector-mysql-3.3.0.jar,file:/opt/flink/lib/flink-cdc-pipeline-connector-starrocks-3.3.0.jar
+2025-02-18 15:56:26,307 INFO  com.starrocks.connector.flink.table.sink.SinkFunctionFactory [] - StarRocks supports transaction load
+2025-02-18 15:56:26,308 INFO  com.starrocks.connector.flink.table.sink.SinkFunctionFactory [] - Choose sink version V2 for at-least-once.
+2025-02-18 15:56:26,308 INFO  com.starrocks.connector.flink.table.sink.SinkFunctionFactory [] - Choose sink version V2
+2025-02-18 15:56:26,316 INFO  org.apache.flink.kubernetes.KubernetesResourceManagerDriver  [] - Recovered 0 pods from previous attempts, current attempt id is 1.
+2025-02-18 15:56:26,316 INFO  org.apache.flink.runtime.resourcemanager.active.ActiveResourceManager [] - Recovered 0 workers from previous attempt.
+Tue Feb 18 15:56:26 UTC 2025 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
+2025-02-18 15:56:26,590 INFO  com.starrocks.connector.flink.manager.StarRocksQueryVisitor  [] - StarRocks version: [3.4.0-e94580b].
+2025-02-18 15:56:26,591 INFO  com.starrocks.connector.flink.table.sink.StarRocksSinkOptions [] - Enable transaction stream load
+2025-02-18 15:56:26,591 INFO  com.starrocks.data.load.stream.StarRocksVersion              [] - Successful to parse starrocks version 3.4.0-e94580b, StarRocksVersion{major=3, minor=4, patch=0}
+2025-02-18 15:56:26,596 INFO  org.apache.flink.cdc.composer.flink.FlinkEnvironmentUtils    [] - pipeline.jars is file:/opt/flink/lib/flink-cdc-dist-3.3.0.jar,file:/opt/flink/lib/flink-cdc-pipeline-connector-mysql-3.3.0.jar,file:/opt/flink/lib/flink-cdc-pipeline-connector-starrocks-3.3.0.jar
+2025-02-18 15:56:26,819 INFO  org.apache.flink.client.deployment.application.executors.EmbeddedExecutor [] - Job e132332cb44bbd5b05b66273017b7ea5 is submitted.
+2025-02-18 15:56:26,819 INFO  org.apache.flink.client.deployment.application.executors.EmbeddedExecutor [] - Submitting Job with JobId=e132332cb44bbd5b05b66273017b7ea5.
+2025-02-18 15:56:27,551 INFO  org.apache.flink.runtime.dispatcher.StandaloneDispatcher     [] - Received JobGraph submission 'Sync MySQL Database to StarRocks' (e132332cb44bbd5b05b66273017b7ea5).
+2025-02-18 15:56:27,552 INFO  org.apache.flink.runtime.dispatcher.StandaloneDispatcher     [] - Submitting job 'Sync MySQL Database to StarRocks' (e132332cb44bbd5b05b66273017b7ea5).
+2025-02-18 15:56:27,563 INFO  org.apache.flink.runtime.jobmaster.JobMasterServiceLeadershipRunner [] - JobMasterServiceLeadershipRunner for job e132332cb44bbd5b05b66273017b7ea5 was granted leadership with leader id 00000000-0000-0000-0000-000000000000. Creating new JobMasterServiceProcess.
+2025-02-18 15:56:27,570 INFO  org.apache.flink.runtime.rpc.pekko.PekkoRpcService           [] - Starting RPC endpoint for org.apache.flink.runtime.jobmaster.JobMaster at pekko://flink/user/rpc/jobmanager_2 .
+2025-02-18 15:56:27,575 INFO  org.apache.flink.runtime.jobmaster.JobMaster                 [] - Initializing job 'Sync MySQL Database to StarRocks' (e132332cb44bbd5b05b66273017b7ea5).
+2025-02-18 15:56:27,604 INFO  org.apache.flink.runtime.jobmaster.JobMaster                 [] - Using restart back off time strategy NoRestartBackoffTimeStrategy for Sync MySQL Database to StarRocks (e132332cb44bbd5b05b66273017b7ea5).
+2025-02-18 15:56:27,627 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph       [] - Created execution graph 52fb5e7401c772a5f0d28c6df0ba081b for job e132332cb44bbd5b05b66273017b7ea5.
+2025-02-18 15:56:27,638 INFO  org.apache.flink.runtime.jobmaster.JobMaster                 [] - Running initialization on master for job Sync MySQL Database to StarRocks (e132332cb44bbd5b05b66273017b7ea5).
+2025-02-18 15:56:27,638 INFO  org.apache.flink.runtime.jobmaster.JobMaster                 [] - Successfully ran initialization on master in 0 ms.
+2025-02-18 15:56:27,723 INFO  org.apache.flink.runtime.scheduler.adapter.DefaultExecutionTopology [] - Built 1 new pipelined regions in 0 ms, total 1 pipelined regions currently.
+2025-02-18 15:56:27,727 INFO  org.apache.flink.runtime.jobmaster.JobMaster                 [] - State backend is set to heap memory org.apache.flink.runtime.state.hashmap.HashMapStateBackend@3b6787bb
+2025-02-18 15:56:27,727 INFO  org.apache.flink.runtime.state.StateBackendLoader            [] - State backend loader loads the state backend as HashMapStateBackend
+2025-02-18 15:56:27,728 INFO  org.apache.flink.runtime.jobmaster.JobMaster                 [] - Using job/cluster config to configure application-defined checkpoint storage: org.apache.flink.runtime.state.storage.FileSystemCheckpointStorage@6680df58
+2025-02-18 15:56:27,747 INFO  org.apache.flink.runtime.checkpoint.CheckpointCoordinator    [] - No checkpoint found during restore.
+2025-02-18 15:56:27,803 INFO  org.apache.flink.runtime.jobmaster.JobMaster                 [] - Using failover strategy org.apache.flink.runtime.executiongraph.failover.RestartPipelinedRegionFailoverStrategy@620dbf80 for Sync MySQL Database to StarRocks (e132332cb44bbd5b05b66273017b7ea5).
+2025-02-18 15:56:27,811 INFO  org.apache.flink.runtime.jobmaster.JobMaster                 [] - Starting execution of job 'Sync MySQL Database to StarRocks' (e132332cb44bbd5b05b66273017b7ea5) under job master id 00000000000000000000000000000000.
+2025-02-18 15:56:27,814 INFO  org.apache.flink.runtime.source.coordinator.SourceCoordinator [] - Starting split enumerator for source Source: Flink CDC Event Source: mysql.
+2025-02-18 15:56:27,816 INFO  org.apache.flink.cdc.connectors.mysql.source.connection.JdbcConnectionPools [] - Create and register connection pool admin@starrocksoneksstack-auroraclusterwriter499c523e-j14pqplkonb8.co2wcr3kjcuz.us-east-1.rds.amazonaws.com:3306
+2025-02-18 15:56:27,819 INFO  org.apache.flink.cdc.connectors.shaded.com.zaxxer.hikari.HikariDataSource [] - connection-pool-starrocksoneksstack-auroraclusterwriter499c523e-j14pqplkonb8.co2wcr3kjcuz.us-east-1.rds.amazonaws.com:3306 - Starting...
+2025-02-18 15:56:27,905 INFO  org.apache.flink.cdc.connectors.shaded.com.zaxxer.hikari.HikariDataSource [] - connection-pool-starrocksoneksstack-auroraclusterwriter499c523e-j14pqplkonb8.co2wcr3kjcuz.us-east-1.rds.amazonaws.com:3306 - Start completed.
+2025-02-18 15:56:27,969 INFO  io.debezium.jdbc.JdbcConnection                              [] - Connection gracefully closed
+2025-02-18 15:56:27,969 INFO  org.apache.flink.cdc.connectors.mysql.MySqlValidator         [] - MySQL validation passed.
+2025-02-18 15:56:28,033 INFO  io.debezium.jdbc.JdbcConnection                              [] - Connection gracefully closed
+2025-02-18 15:56:28,035 INFO  org.apache.flink.cdc.runtime.operators.schema.common.SchemaRegistry [] - Starting SchemaRegistry - SchemaOperator.
+2025-02-18 15:56:28,037 INFO  org.apache.flink.runtime.jobmaster.JobMaster                 [] - Starting scheduling with scheduling strategy [org.apache.flink.runtime.scheduler.strategy.PipelinedRegionSchedulingStrategy]
+2025-02-18 15:56:28,037 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph       [] - Job Sync MySQL Database to StarRocks (e132332cb44bbd5b05b66273017b7ea5) switched from state CREATED to RUNNING.
+2025-02-18 15:56:28,039 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph       [] - Source: Flink CDC Event Source: mysql -> SchemaOperator -> PrePartition (1/1) (52fb5e7401c772a5f0d28c6df0ba081b_cbc357ccb763df2852fee8c4fc7d55f2_0_0) switched from CREATED to SCHEDULED.
+2025-02-18 15:56:28,039 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph       [] - PostPartition -> Sink Writer: StarRocks Sink -> Sink Committer: StarRocks Sink (1/1) (52fb5e7401c772a5f0d28c6df0ba081b_0deb1b26a3d9eb3c8f0c11f7110b2903_0_0) switched from CREATED to SCHEDULED.
+2025-02-18 15:56:28,050 INFO  org.apache.flink.runtime.jobmaster.JobMaster                 [] - Connecting to ResourceManager pekko.tcp://flink@flink-cdc-pipeline-job.flinkcdc:6123/user/rpc/resourcemanager_*(00000000000000000000000000000000)
+2025-02-18 15:56:28,055 INFO  org.apache.flink.runtime.jobmaster.JobMaster                 [] - Resolved ResourceManager address, beginning registration
+2025-02-18 15:56:28,056 INFO  org.apache.flink.runtime.resourcemanager.active.ActiveResourceManager [] - Registering job manager 00000000000000000000000000000000@pekko.tcp://flink@flink-cdc-pipeline-job.flinkcdc:6123/user/rpc/jobmanager_2 for job e132332cb44bbd5b05b66273017b7ea5.
+2025-02-18 15:56:28,104 INFO  org.apache.flink.runtime.resourcemanager.active.ActiveResourceManager [] - Registered job manager 00000000000000000000000000000000@pekko.tcp://flink@flink-cdc-pipeline-job.flinkcdc:6123/user/rpc/jobmanager_2 for job e132332cb44bbd5b05b66273017b7ea5.
+2025-02-18 15:56:28,106 INFO  org.apache.flink.runtime.jobmaster.JobMaster                 [] - JobManager successfully registered at ResourceManager, leader id: 00000000000000000000000000000000.
+2025-02-18 15:56:28,107 INFO  org.apache.flink.runtime.resourcemanager.slotmanager.FineGrainedSlotManager [] - Received resource requirements from job e132332cb44bbd5b05b66273017b7ea5: [ResourceRequirement{resourceProfile=ResourceProfile{UNKNOWN}, numberOfRequiredSlots=1}]
+2025-02-18 15:56:28,121 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - Read list of available databases
+2025-02-18 15:56:28,140 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 list of available databases is: [information_schema, mysql, performance_schema, sys, workshop_db]
+2025-02-18 15:56:28,140 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - Read list of available tables in each database
+2025-02-18 15:56:28,164 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.aurora_s3_load_history' is filtered out of table capturing
+2025-02-18 15:56:28,164 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.columns_priv' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.component' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.db' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.default_roles' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.engine_cost' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.func' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.general_log' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.general_log_backup' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.global_grants' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.gtid_executed' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.help_category' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.help_keyword' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.help_relation' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.help_topic' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.innodb_index_stats' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.innodb_table_stats' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.password_history' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.plugin' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.procs_priv' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.proxies_priv' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.rds_configuration' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.rds_global_status_history' is filtered out of table capturing
+2025-02-18 15:56:28,165 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.rds_global_status_history_old' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.rds_heartbeat2' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.rds_history' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.rds_replication_status' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.rds_sysinfo' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.replication_asynchronous_connection_failover' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.replication_asynchronous_connection_failover_managed' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.replication_group_configuration_version' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.replication_group_member_actions' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.ro_replica_status_internal' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.role_edges' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.server_cost' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.servers' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.slave_master_info' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.slave_relay_log_info' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.slave_worker_info' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.slow_log' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.slow_log_backup' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.tables_priv' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.time_zone' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.time_zone_leap_second' is filtered out of table capturing
+2025-02-18 15:56:28,166 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.time_zone_name' is filtered out of table capturing
+2025-02-18 15:56:28,167 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.time_zone_transition' is filtered out of table capturing
+2025-02-18 15:56:28,167 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.time_zone_transition_type' is filtered out of table capturing
+2025-02-18 15:56:28,167 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'mysql.user' is filtered out of table capturing
+2025-02-18 15:56:28,170 INFO  org.apache.flink.runtime.resourcemanager.slotmanager.FineGrainedSlotManager [] - Matching resource requirements against available resources.
+Missing resources:
+	 Job e132332cb44bbd5b05b66273017b7ea5
+		ResourceRequirement{resourceProfile=ResourceProfile{UNKNOWN}, numberOfRequiredSlots=1}
+Current resources:
+	(none)
+2025-02-18 15:56:28,172 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.accounts' is filtered out of table capturing
+2025-02-18 15:56:28,172 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.binary_log_transaction_compression_stats' is filtered out of table capturing
+2025-02-18 15:56:28,172 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.cond_instances' is filtered out of table capturing
+2025-02-18 15:56:28,172 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.data_lock_waits' is filtered out of table capturing
+2025-02-18 15:56:28,172 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.data_locks' is filtered out of table capturing
+2025-02-18 15:56:28,172 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.error_log' is filtered out of table capturing
+2025-02-18 15:56:28,172 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_errors_summary_by_account_by_error' is filtered out of table capturing
+2025-02-18 15:56:28,172 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_errors_summary_by_host_by_error' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_errors_summary_by_thread_by_error' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_errors_summary_by_user_by_error' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_errors_summary_global_by_error' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_stages_current' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_stages_history' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_stages_history_long' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_stages_summary_by_account_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_stages_summary_by_host_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_stages_summary_by_thread_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_stages_summary_by_user_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_stages_summary_global_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_statements_current' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_statements_histogram_by_digest' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_statements_histogram_global' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_statements_history' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_statements_history_long' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_statements_summary_by_account_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_statements_summary_by_digest' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_statements_summary_by_host_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_statements_summary_by_program' is filtered out of table capturing
+2025-02-18 15:56:28,173 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_statements_summary_by_thread_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_statements_summary_by_user_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_statements_summary_global_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_transactions_current' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_transactions_history' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_transactions_history_long' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_transactions_summary_by_account_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_transactions_summary_by_host_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_transactions_summary_by_thread_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_transactions_summary_by_user_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_transactions_summary_global_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_waits_current' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_waits_history' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_waits_history_long' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_waits_summary_by_account_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_waits_summary_by_host_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_waits_summary_by_instance' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_waits_summary_by_thread_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_waits_summary_by_user_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.events_waits_summary_global_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.file_instances' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.file_summary_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.file_summary_by_instance' is filtered out of table capturing
+2025-02-18 15:56:28,174 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.global_status' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.global_variables' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.host_cache' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.hosts' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.keyring_component_status' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.keyring_keys' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.log_status' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.malloc_stats' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.malloc_stats_totals' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.memory_summary_by_account_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.memory_summary_by_host_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.memory_summary_by_thread_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.memory_summary_by_user_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.memory_summary_global_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.metadata_locks' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.mutex_instances' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.objects_summary_global_by_type' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.performance_timers' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.persisted_variables' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.prepared_statements_instances' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.processlist' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.rds_events_threads_waits_current' is filtered out of table capturing
+2025-02-18 15:56:28,175 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.rds_events_threads_waits_lock_current' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.rds_processlist' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.replication_applier_configuration' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.replication_applier_filters' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.replication_applier_global_filters' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.replication_applier_status' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.replication_applier_status_by_coordinator' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.replication_applier_status_by_worker' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.replication_asynchronous_connection_failover' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.replication_asynchronous_connection_failover_managed' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.replication_connection_configuration' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.replication_connection_status' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.replication_group_member_stats' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.replication_group_members' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.rwlock_instances' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.session_account_connect_attrs' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.session_connect_attrs' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.session_status' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.session_variables' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.setup_actors' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.setup_consumers' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.setup_instruments' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.setup_objects' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.setup_threads' is filtered out of table capturing
+2025-02-18 15:56:28,176 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.socket_instances' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.socket_summary_by_event_name' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.socket_summary_by_instance' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.status_by_account' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.status_by_host' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.status_by_thread' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.status_by_user' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.table_handles' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.table_io_waits_summary_by_index_usage' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.table_io_waits_summary_by_table' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.table_lock_waits_summary_by_table' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.threads' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.tls_channel_status' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.user_defined_functions' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.user_variables_by_thread' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.users' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.variables_by_thread' is filtered out of table capturing
+2025-02-18 15:56:28,177 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'performance_schema.variables_info' is filtered out of table capturing
+2025-02-18 15:56:28,181 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 'sys.sys_config' is filtered out of table capturing
+2025-02-18 15:56:28,183 INFO  org.apache.flink.cdc.connectors.mysql.source.utils.TableDiscoveryUtils [] - 	 including table 'workshop_db.events' for further processing
+2025-02-18 15:56:28,204 INFO  io.debezium.jdbc.JdbcConnection                              [] - Connection gracefully closed
+2025-02-18 15:56:28,205 INFO  org.apache.flink.cdc.connectors.mysql.source.assigners.MySqlSnapshotSplitAssigner [] - Start splitting table workshop_db.events into chunks...
+2025-02-18 15:56:28,240 INFO  org.apache.flink.runtime.resourcemanager.active.ActiveResourceManager [] - need request 1 new workers, current worker number 0, declared worker number 1
+2025-02-18 15:56:28,240 INFO  org.apache.flink.runtime.util.config.memory.ProcessMemoryUtils [] - The derived from fraction jvm overhead memory (92.444mb (96935027 bytes)) is less than its min value 192.000mb (201326592 bytes), min value will be used instead
+2025-02-18 15:56:28,241 INFO  org.apache.flink.runtime.resourcemanager.active.ActiveResourceManager [] - Requesting new worker with resource spec WorkerResourceSpec {cpuCores=1.0, taskHeapSize=25.600mb (26843542 bytes), taskOffHeapSize=0 bytes, networkMemSize=64.000mb (67108864 bytes), managedMemSize=230.400mb (241591914 bytes), numSlots=1}, current pending count: 1.
+2025-02-18 15:56:28,245 INFO  org.apache.flink.runtime.externalresource.ExternalResourceUtils [] - Enabled external resources: []
+2025-02-18 15:56:28,255 INFO  org.apache.flink.configuration.Configuration                 [] - Config uses fallback configuration key 'kubernetes.service-account' instead of key 'kubernetes.taskmanager.service-account'
+2025-02-18 15:56:28,262 INFO  org.apache.flink.kubernetes.KubernetesResourceManagerDriver  [] - Creating new TaskManager pod with name flink-cdc-pipeline-job-taskmanager-1-1 and resource <1024,1.0>.
+2025-02-18 15:56:28,622 INFO  org.apache.flink.kubernetes.KubernetesResourceManagerDriver  [] - Pod flink-cdc-pipeline-job-taskmanager-1-1 is created.
+2025-02-18 15:56:29,310 INFO  org.apache.flink.kubernetes.KubernetesResourceManagerDriver  [] - Received new TaskManager pod: flink-cdc-pipeline-job-taskmanager-1-1
+2025-02-18 15:56:29,310 INFO  org.apache.flink.runtime.resourcemanager.active.ActiveResourceManager [] - Requested worker flink-cdc-pipeline-job-taskmanager-1-1 with resource spec WorkerResourceSpec {cpuCores=1.0, taskHeapSize=25.600mb (26843542 bytes), taskOffHeapSize=0 bytes, networkMemSize=64.000mb (67108864 bytes), managedMemSize=230.400mb (241591914 bytes), numSlots=1}.
+2025-02-18 15:56:29,765 INFO  org.apache.flink.cdc.connectors.mysql.source.assigners.MySqlChunkSplitter [] - Use unevenly-sized chunks for table workshop_db.events, the chunk size is 8096 from null
+2025-02-18 15:56:29,923 INFO  org.apache.flink.cdc.connectors.mysql.source.assigners.MySqlChunkSplitter [] - ChunkSplitter has split 0 chunks for table workshop_db.events
+2025-02-18 15:56:29,924 INFO  org.apache.flink.cdc.connectors.mysql.source.assigners.MySqlChunkSplitter [] - Use unevenly-sized chunks for table workshop_db.events, the chunk size is 8096 from f456297e10454081bf59dba4b47f260a
+2025-02-18 15:56:29,933 INFO  org.apache.flink.cdc.connectors.mysql.source.assigners.MySqlSnapshotSplitAssigner [] - Split table workshop_db.events into 2 chunks, time cost: 1728ms.
+2025-02-18 15:56:34,635 INFO  org.apache.flink.runtime.resourcemanager.active.ActiveResourceManager [] - Registering TaskManager with ResourceID flink-cdc-pipeline-job-taskmanager-1-1 (pekko.tcp://flink@10.0.2.133:6122/user/rpc/taskmanager_0) at ResourceManager
+2025-02-18 15:56:34,645 INFO  org.apache.flink.runtime.resourcemanager.slotmanager.FineGrainedSlotManager [] - Registering task executor flink-cdc-pipeline-job-taskmanager-1-1 under 170370a79411d5e4305d168a21b18195 at the slot manager.
+2025-02-18 15:56:34,647 INFO  org.apache.flink.runtime.resourcemanager.slotmanager.DefaultSlotStatusSyncer [] - Starting allocation of slot fda7b1fbaea4724a924479f3d95d7ff6 from flink-cdc-pipeline-job-taskmanager-1-1 for job e132332cb44bbd5b05b66273017b7ea5 with resource profile ResourceProfile{cpuCores=1, taskHeapMemory=25.600mb (26843542 bytes), taskOffHeapMemory=0 bytes, managedMemory=230.400mb (241591914 bytes), networkMemory=64.000mb (67108864 bytes)}.
+2025-02-18 15:56:34,649 INFO  org.apache.flink.runtime.resourcemanager.active.ActiveResourceManager [] - Worker flink-cdc-pipeline-job-taskmanager-1-1 is registered.
+2025-02-18 15:56:34,650 INFO  org.apache.flink.runtime.resourcemanager.active.ActiveResourceManager [] - Worker flink-cdc-pipeline-job-taskmanager-1-1 with resource spec WorkerResourceSpec {cpuCores=1.0, taskHeapSize=25.600mb (26843542 bytes), taskOffHeapSize=0 bytes, networkMemSize=64.000mb (67108864 bytes), managedMemSize=230.400mb (241591914 bytes), numSlots=1} was requested in current attempt. Current pending count after registering: 0.
+2025-02-18 15:56:34,733 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph       [] - Source: Flink CDC Event Source: mysql -> SchemaOperator -> PrePartition (1/1) (52fb5e7401c772a5f0d28c6df0ba081b_cbc357ccb763df2852fee8c4fc7d55f2_0_0) switched from SCHEDULED to DEPLOYING.
+2025-02-18 15:56:34,743 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph       [] - Deploying Source: Flink CDC Event Source: mysql -> SchemaOperator -> PrePartition (1/1) (attempt #0) with attempt id 52fb5e7401c772a5f0d28c6df0ba081b_cbc357ccb763df2852fee8c4fc7d55f2_0_0 and vertex id cbc357ccb763df2852fee8c4fc7d55f2_0 to flink-cdc-pipeline-job-taskmanager-1-1 @ ip-10-0-2-133.ec2.internal (dataPort=39351) with allocation id fda7b1fbaea4724a924479f3d95d7ff6
+2025-02-18 15:56:34,744 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph       [] - PostPartition -> Sink Writer: StarRocks Sink -> Sink Committer: StarRocks Sink (1/1) (52fb5e7401c772a5f0d28c6df0ba081b_0deb1b26a3d9eb3c8f0c11f7110b2903_0_0) switched from SCHEDULED to DEPLOYING.
+2025-02-18 15:56:34,745 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph       [] - Deploying PostPartition -> Sink Writer: StarRocks Sink -> Sink Committer: StarRocks Sink (1/1) (attempt #0) with attempt id 52fb5e7401c772a5f0d28c6df0ba081b_0deb1b26a3d9eb3c8f0c11f7110b2903_0_0 and vertex id 0deb1b26a3d9eb3c8f0c11f7110b2903_0 to flink-cdc-pipeline-job-taskmanager-1-1 @ ip-10-0-2-133.ec2.internal (dataPort=39351) with allocation id fda7b1fbaea4724a924479f3d95d7ff6
+2025-02-18 15:56:35,050 WARN  org.apache.flink.runtime.webmonitor.retriever.impl.RpcGatewayRetriever [] - Error while retrieving the leader gateway. Retrying to connect to pekko.tcp://flink@flink-cdc-pipeline-job.flinkcdc:6123/user/rpc/resourcemanager_*.
+2025-02-18 15:56:35,053 ERROR org.apache.flink.runtime.rest.handler.taskmanager.TaskManagersHandler [] - Exception occurred in REST handler: Cannot connect to ResourceManager right now. Please try to refresh.
+2025-02-18 15:56:35,322 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph       [] - Source: Flink CDC Event Source: mysql -> SchemaOperator -> PrePartition (1/1) (52fb5e7401c772a5f0d28c6df0ba081b_cbc357ccb763df2852fee8c4fc7d55f2_0_0) switched from DEPLOYING to INITIALIZING.
+2025-02-18 15:56:35,323 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph       [] - PostPartition -> Sink Writer: StarRocks Sink -> Sink Committer: StarRocks Sink (1/1) (52fb5e7401c772a5f0d28c6df0ba081b_0deb1b26a3d9eb3c8f0c11f7110b2903_0_0) switched from DEPLOYING to INITIALIZING.
+2025-02-18 15:56:36,423 INFO  org.apache.flink.cdc.runtime.operators.schema.common.SchemaRegistry [] - Sink subtask 0 already registered.
+2025-02-18 15:56:36,507 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph       [] - PostPartition -> Sink Writer: StarRocks Sink -> Sink Committer: StarRocks Sink (1/1) (52fb5e7401c772a5f0d28c6df0ba081b_0deb1b26a3d9eb3c8f0c11f7110b2903_0_0) switched from INITIALIZING to RUNNING.
+2025-02-18 15:56:37,817 INFO  org.apache.flink.runtime.source.coordinator.SourceCoordinator [] - Source Source: Flink CDC Event Source: mysql registering reader for parallel task 0 (#0) @ 10.0.2.133
+2025-02-18 15:56:37,817 INFO  org.apache.flink.runtime.executiongraph.ExecutionGraph       [] - Source: Flink CDC Event Source: mysql -> SchemaOperator -> PrePartition (1/1) (52fb5e7401c772a5f0d28c6df0ba081b_cbc357ccb763df2852fee8c4fc7d55f2_0_0) switched from INITIALIZING to RUNNING.
+2025-02-18 15:56:37,818 INFO  org.apache.flink.runtime.source.coordinator.SourceCoordinator [] - Source Source: Flink CDC Event Source: mysql received split request from parallel task 0 (#0)
+2025-02-18 15:56:37,835 INFO  org.apache.flink.cdc.connectors.mysql.source.enumerator.MySqlSourceEnumerator [] - The enumerator assigns split MySqlSnapshotSplit{tableId=workshop_db.events, splitId='workshop_db.events:0', splitKeyType=[`id` VARCHAR(255) NOT NULL], splitStart=null, splitEnd=[f456297e10454081bf59dba4b47f260a], highWatermark=null} to subtask 0
+2025-02-18 15:56:39,478 INFO  org.apache.flink.cdc.runtime.operators.schema.regular.SchemaCoordinator [] - Not all active sink writers have completed flush. Flushed writers: null, expected: [0].
+2025-02-18 15:56:39,519 INFO  org.apache.flink.cdc.runtime.operators.schema.regular.SchemaCoordinator [] - Sink subtask 0 succeed flushing from source subTask 0.
+2025-02-18 15:56:39,519 INFO  org.apache.flink.cdc.runtime.operators.schema.regular.SchemaCoordinator [] - Currently flushed sink writers for source task 0 are: [0]
+2025-02-18 15:56:40,489 INFO  org.apache.flink.cdc.runtime.operators.schema.regular.SchemaCoordinator [] - All sink writers have flushed for subTaskId 0. Switching to APPLYING state and starting schema evolution...
+2025-02-18 15:56:40,493 INFO  org.apache.flink.cdc.runtime.operators.schema.regular.SchemaCoordinator [] - Step 1 - Start deducing evolved schema change for CreateTableEvent{tableId=workshop_db.events, schema=columns={`id` VARCHAR(255) NOT NULL,`cohort_id` VARCHAR(255),`player_id` VARCHAR(255),`player_type` VARCHAR(50),`session_id` VARCHAR(255),`event_type` VARCHAR(50),`timestamp` VARCHAR(50),`stage_id` VARCHAR(255),`stage_score` INT}, primaryKeys=id, options=()}
+2025-02-18 15:56:40,500 INFO  org.apache.flink.cdc.runtime.operators.schema.regular.SchemaCoordinator [] - Step 2 - Affected downstream tables are: [workshop_db.events]
+2025-02-18 15:56:40,500 INFO  org.apache.flink.cdc.runtime.operators.schema.regular.SchemaCoordinator [] - Step 3.1 - For to-be-evolved table workshop_db.events with schema null...
+2025-02-18 15:56:40,501 INFO  org.apache.flink.cdc.runtime.operators.schema.regular.SchemaCoordinator [] - Step 3.2 - upstream dependency tables are: [workshop_db.events]
+2025-02-18 15:56:40,501 INFO  org.apache.flink.cdc.runtime.operators.schema.regular.SchemaCoordinator [] - Step 3.3 - It's an one-by-one routing and could be forwarded as CreateTableEvent{tableId=workshop_db.events, schema=columns={`id` VARCHAR(255) NOT NULL,`cohort_id` VARCHAR(255),`player_id` VARCHAR(255),`player_type` VARCHAR(50),`session_id` VARCHAR(255),`event_type` VARCHAR(50),`timestamp` VARCHAR(50),`stage_id` VARCHAR(255),`stage_score` INT}, primaryKeys=id, options=()}.
+2025-02-18 15:56:40,502 INFO  org.apache.flink.cdc.runtime.operators.schema.regular.SchemaCoordinator [] - Step 4 - After being normalized with LENIENT behavior, final schema change events are: [CreateTableEvent{tableId=workshop_db.events, schema=columns={`id` VARCHAR(255) NOT NULL,`cohort_id` VARCHAR(255),`player_id` VARCHAR(255),`player_type` VARCHAR(50),`session_id` VARCHAR(255),`event_type` VARCHAR(50),`timestamp` VARCHAR(50),`stage_id` VARCHAR(255),`stage_score` INT}, primaryKeys=id, options=()}]
+2025-02-18 15:56:40,502 INFO  org.apache.flink.cdc.runtime.operators.schema.regular.SchemaCoordinator [] - All sink subtask have flushed for table workshop_db.events. Start to apply schema change request: 
+	SchemaChangeRequest{tableId=workshop_db.events, schemaChangeEvent=CreateTableEvent{tableId=workshop_db.events, schema=columns={`id` VARCHAR(255) NOT NULL,`cohort_id` VARCHAR(255),`player_id` VARCHAR(255),`player_type` VARCHAR(50),`session_id` VARCHAR(255),`event_type` VARCHAR(50),`timestamp` VARCHAR(50),`stage_id` VARCHAR(255),`stage_score` INT}, primaryKeys=id, options=()}, subTaskId=0}
+that extracts to:
+	CreateTableEvent{tableId=workshop_db.events, schema=columns={`id` VARCHAR(255) NOT NULL,`cohort_id` VARCHAR(255),`player_id` VARCHAR(255),`player_type` VARCHAR(50),`session_id` VARCHAR(255),`event_type` VARCHAR(50),`timestamp` VARCHAR(50),`stage_id` VARCHAR(255),`stage_score` INT}, primaryKeys=id, options=()}
+Tue Feb 18 15:56:40 UTC 2025 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
+2025-02-18 15:56:40,520 INFO  com.starrocks.connector.flink.catalog.StarRocksCatalog       [] - Open StarRocks catalog
+Tue Feb 18 15:56:40 UTC 2025 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
+Tue Feb 18 15:56:40 UTC 2025 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
+2025-02-18 15:56:40,694 INFO  com.starrocks.connector.flink.catalog.StarRocksCatalog       [] - Successful to create database workshop_db, sql: CREATE DATABASE IF NOT EXISTS workshop_db;
+Tue Feb 18 15:56:40 UTC 2025 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
+2025-02-18 15:56:40,722 INFO  com.starrocks.connector.flink.catalog.StarRocksCatalog       [] - Success to create table workshop_db.workshop_db, sql: CREATE TABLE IF NOT EXISTS `workshop_db`.`events` (
+`id` VARCHAR(765) NOT NULL,
+`cohort_id` VARCHAR(765) NULL,
+`player_id` VARCHAR(765) NULL,
+`player_type` VARCHAR(150) NULL,
+`session_id` VARCHAR(765) NULL,
+`event_type` VARCHAR(150) NULL,
+`timestamp` VARCHAR(150) NULL,
+`stage_id` VARCHAR(765) NULL,
+`stage_score` INT NULL
+) PRIMARY KEY (`id`)
+DISTRIBUTED BY HASH (`id`)
+PROPERTIES (
+"replication_num" = "1"
+);
+2025-02-18 15:56:40,723 INFO  org.apache.flink.cdc.connectors.starrocks.sink.StarRocksMetadataApplier [] - Successful to create table, event: CreateTableEvent{tableId=workshop_db.events, schema=columns={`id` VARCHAR(255) NOT NULL,`cohort_id` VARCHAR(255),`player_id` VARCHAR(255),`player_type` VARCHAR(50),`session_id` VARCHAR(255),`event_type` VARCHAR(50),`timestamp` VARCHAR(50),`stage_id` VARCHAR(255),`stage_score` INT}, primaryKeys=id, options=()}
+2025-02-18 15:56:40,723 INFO  org.apache.flink.cdc.runtime.operators.schema.regular.SchemaCoordinator [] - Successfully applied schema change event CreateTableEvent{tableId=workshop_db.events, schema=columns={`id` VARCHAR(255) NOT NULL,`cohort_id` VARCHAR(255),`player_id` VARCHAR(255),`player_type` VARCHAR(50),`session_id` VARCHAR(255),`event_type` VARCHAR(50),`timestamp` VARCHAR(50),`stage_id` VARCHAR(255),`stage_score` INT}, primaryKeys=id, options=()} to external system.
+2025-02-18 15:56:40,723 INFO  org.apache.flink.cdc.runtime.operators.schema.regular.SchemaCoordinator [] - SchemaChangeStatus switched from APPLYING to IDLE.
+2025-02-18 15:56:40,729 INFO  org.apache.flink.cdc.runtime.operators.schema.common.SchemaRegistry [] - Handling evolved schema request: GetEvolvedSchemaRequest{tableId=workshop_db.events, schemaVersion=-1}
+2025-02-18 15:56:41,427 INFO  org.apache.flink.cdc.connectors.mysql.source.enumerator.MySqlSourceEnumerator [] - The enumerator under INITIAL_ASSIGNING receives finished split offsets FinishedSnapshotSplitsReportEvent{finishedOffsets={workshop_db.events:0={ts_sec=1739894198, file=mysql-bin-changelog.000003, pos=4396158, kind=SPECIFIC, gtids=, row=0, event=0}}} from subtask 0.
+2025-02-18 15:56:41,428 INFO  org.apache.flink.runtime.source.coordinator.SourceCoordinator [] - Source Source: Flink CDC Event Source: mysql received split request from parallel task 0 (#0)
+2025-02-18 15:56:41,429 INFO  org.apache.flink.cdc.connectors.mysql.source.enumerator.MySqlSourceEnumerator [] - The enumerator assigns split MySqlSnapshotSplit{tableId=workshop_db.events, splitId='workshop_db.events:1', splitKeyType=[`id` VARCHAR(255) NOT NULL], splitStart=[f456297e10454081bf59dba4b47f260a], splitEnd=null, highWatermark=null} to subtask 0
+2025-02-18 15:56:42,519 INFO  org.apache.flink.cdc.connectors.mysql.source.enumerator.MySqlSourceEnumerator [] - The enumerator under INITIAL_ASSIGNING receives finished split offsets FinishedSnapshotSplitsReportEvent{finishedOffsets={workshop_db.events:1={ts_sec=1739894201, file=mysql-bin-changelog.000003, pos=4396158, kind=SPECIFIC, gtids=, row=0, event=0}}} from subtask 0.
+2025-02-18 15:56:42,519 INFO  org.apache.flink.cdc.connectors.mysql.source.assigners.AssignerStatus [] - Assigner status changes from INITIAL_ASSIGNING to INITIAL_ASSIGNING_FINISHED
+2025-02-18 15:56:42,519 INFO  org.apache.flink.cdc.connectors.mysql.source.assigners.MySqlSnapshotSplitAssigner [] - Snapshot split assigner received all splits finished and the job parallelism is 1, snapshot split assigner is turn into finished status.
+2025-02-18 15:56:42,519 INFO  org.apache.flink.runtime.source.coordinator.SourceCoordinator [] - Source Source: Flink CDC Event Source: mysql received split request from parallel task 0 (#0)
+2025-02-18 15:56:42,524 INFO  org.apache.flink.cdc.connectors.mysql.source.enumerator.MySqlSourceEnumerator [] - The enumerator assigns split MySqlBinlogSplit{splitId='binlog-split', offset={ts_sec=1739894198, file=mysql-bin-changelog.000003, pos=4396158, kind=SPECIFIC, gtids=, row=0, event=0}, endOffset={ts_sec=0, file=, pos=-9223372036854775808, kind=NON_STOPPING, row=0, event=0}, isSuspended=false} to subtask 0
+2025-02-18 15:56:42,806 INFO  org.apache.flink.cdc.connectors.mysql.source.enumerator.MySqlSourceEnumerator [] - The enumerator receives notice from subtask 0 for the binlog split assignment. 
