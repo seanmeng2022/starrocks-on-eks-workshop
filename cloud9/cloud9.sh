@@ -8,6 +8,14 @@ echo "Starting Cloud9 environment setup..."
 # Update system packages
 sudo yum update -y
 
+
+#update node.js version
+sudo yum remove -y nodejs npm
+curl -fsSL https://rpm.nodesource.com/setup_22.x | sudo bash -
+sudo yum install -y nodejs
+
+sudo npm install -g aws-cdk --force
+
 # Install kubectl
 echo "Installing kubectl..."
 curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.1/2023-04-19/bin/linux/amd64/kubectl
