@@ -195,14 +195,15 @@ Resources:
       RouteTableId: !Ref PrivateRouteTable
       SubnetId: !Ref PrivateSubnet3
 
-  #============================================================================#
-  # Cloud9
-  #============================================================================#
-  Cloud9Environment:
-    Type: AWS::Cloud9::EnvironmentEC2
-    Properties:
-      Name: StarRocks-Workshop-IDE
-      Description: Cloud9 IDE for StarRocks Workshop
-      InstanceType: m5.4xlarge
-      SubnetId: !Ref PublicSubnet1
-      ImageId: amazonlinux-2-x86_64 # Amazon Linux 2
+#============================================================================#
+# Cloud9
+#============================================================================#
+Cloud9Environment:
+  Type: AWS::Cloud9::EnvironmentEC2
+  Properties:
+    Name: StarRocks-Workshop-IDE
+    Description: Cloud9 IDE for StarRocks Workshop
+    InstanceType: m5.4xlarge
+    SubnetId: !Ref PrivateSubnet1
+    ImageId: amazonlinux-2-x86_64 # Amazon Linux 2
+    ConnectionType: CONNECT_SSM  # Required for private subnets
