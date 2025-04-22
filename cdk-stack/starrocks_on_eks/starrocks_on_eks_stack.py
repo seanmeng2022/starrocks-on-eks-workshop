@@ -46,7 +46,6 @@ class StarrocksOnEksStack(Stack):
         instance_details = instances['Reservations'][0]['Instances'][0]
         vpc_id = instance_details['VpcId']
         private_ip = instance_details['PrivateIpAddress']
-        public_ip = instance_details['PublicIpAddress']
 
         # Use the found VPC and apply tags to its subnets
         vpc = ec2.Vpc.from_lookup(self, "ExistingVPC",
