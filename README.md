@@ -14,12 +14,16 @@
 
 * 配置aws账号的ak，sk
 
-```AWS Access Key ID [None]: <您的AK>
+```
+AWS Access Key ID [None]: <您的AK>
 AWS Secret Access Key [None]: <您的SK>
 Default region name [None]: us-east-1
-Default output format [None]: ```
+Default output format [None]:
+```
 
 * 运行cloud9环境初始化脚本，该脚本会安装后续workshop需要的相关环境，如helm，kubetcl，扩展EBS磁盘等
 
-```sh cloud9/cloud9.sh
+```
+sh cloud9/cloud9.sh
+```
 
