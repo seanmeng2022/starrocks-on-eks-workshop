@@ -31,8 +31,7 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bas
 helm version
 helm repo add eks https://aws.github.io/eks-charts
 helm repo update eks
-helm repo add flink-operator-repo https://downloads.apache.org/flink/flink-kubernetes-operator-1.9.0/
-
+helm repo add flink-operator-repo https://archive.apache.org/dist/flink/flink-kubernetes-operator-1.9.0/
 
 
 # Resize EBS volume (default 100GB if not specified)
