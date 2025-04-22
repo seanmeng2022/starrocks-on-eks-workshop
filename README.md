@@ -24,6 +24,13 @@ Default output format [None]:
 * 运行cloud9环境初始化脚本，该脚本会安装后续workshop需要的相关环境，如helm，kubetcl，扩展EBS磁盘等
 
 ```
-sh cloud9/cloud9.sh
+sh starrocks-on-eks-workshop/cloud9/cloud9.sh 
 ```
+* 部署cdk资源----这里要添加writer endpoint的输出
+```
+cd starrocks-on-eks-workshop/cdk-stack/
+pip3 install -r requirement.txt
+cdk bootstrap
+cdk deploy
 
+```
