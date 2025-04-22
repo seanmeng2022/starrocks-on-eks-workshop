@@ -8,10 +8,6 @@ echo "Starting Cloud9 environment setup..."
 # Update system packages
 sudo yum update -y
 
-# Install MySQL client
-echo "Installing MySQL client..."
-sudo yum install -y mysql
-
 # Install kubectl
 echo "Installing kubectl..."
 curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.1/2023-04-19/bin/linux/amd64/kubectl
