@@ -33,16 +33,21 @@ sh starrocks-on-eks-workshop/cloud9/cloud9.sh
 ```
 * 部署cdk资源----这里要添加writer endpoint的输出
 ```
-cd starrocks-on-eks-workshop/cdk-stack/
-pip3 install -r requirement.txt
-cdk bootstrap
-cdk deploy
+Admin:~/environment $ cd starrocks-on-eks-workshop/cdk-stack/
+Admin:~/environment $ pip3 install -r requirement.txt
+Admin:~/environment $ cdk bootstrap
+Admin:~/environment $ cdk deploy
 ```
 
 * 记录以下CDK输出
 
 ```
-xxxx
+Outputs:
+StarrocksOnEksStack.BucketName = starrocks-on-eks-workshop-436103886277-us-east-1
+StarrocksOnEksStack.ClusterEndpoint = starrocksoneksstack-auroracluster23d869c0-3dezvmq1vogu.cluster-co2wcr3kjcuz.us-east-1.rds.amazonaws.comStarrocksOnEksStack.EKSClusterName = StarrocksEKSCluster3A432E2B-bb3cea276eb24eb8a36a274fcee16316
+StarrocksOnEksStack.FlinkCdcRepositoryUri = 436103886277.dkr.ecr.us-east-1.amazonaws.com/flink-cdc-pipeline
+StarrocksOnEksStack.StarrocksEKSClusterConfigCommand324EAEDF = aws eks update-kubeconfig --name StarrocksEKSCluster3A432E2B-bb3cea276eb24eb8a36a274fcee16316 --region us-east-1 --role-arn arn:aws:iam::436103886277:role/StarrocksOnEksStack-EksMastersRoleD1AE213C-E95o0FOZ5SKhStarrocksOnEksStack.StarrocksEKSClusterGetTokenCommand3DE05C2D = aws eks get-token --cluster-name StarrocksEKSCluster3A432E2B-bb3cea276eb24eb8a36a274fcee16316 --region us-east-1 --role-arn arn:aws:iam::436103886277:role/StarrocksOnEksStack-EksMastersRoleD1AE213C-E95o0FOZ5SKhStarrocksOnEksStack.WriterEndpoint = starrocksoneksstack-auroracluster23d869c0-3dezvmq1vogu.cluster-co2wcr3kjcuz.us-east-1.rds.amazonaws.comStack ARN:
+arn:aws:cloudformation:us-east-1:436103886277:stack/StarrocksOnEksStack/6aad7a70-1f64-11f0-8445-12a81ae52fad
 ```
 
 ### 准备基础数据
