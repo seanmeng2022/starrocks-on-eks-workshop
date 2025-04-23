@@ -1,6 +1,10 @@
-# 环境准备
+# Starrocks on EKS workshop
+## 说明
+该workshop会针对Starrocks在AWS EKS上的部署进行逐步演示和说明。
 
-## 搭建基础环境（Cloud9/VPC/EKS/Aurora等）
+## 环境准备
+
+### 搭建基础环境（Cloud9/VPC/EKS/Aurora等）
 * 通过Cloudformation部署cloud9以及VPC环境
 * 进入AWS Cloud9控制台，登录Cloud9实例
 <img width="1327" alt="image" src="https://github.com/user-attachments/assets/d993a3c1-5d94-4b11-ba00-1f2180825012" />
@@ -15,6 +19,7 @@
 * 配置aws账号的ak，sk
 
 ```
+Admin:~/environment $ aws configure
 AWS Access Key ID [None]: <您的AK>
 AWS Secret Access Key [None]: <您的SK>
 Default region name [None]: us-east-1
@@ -32,5 +37,24 @@ cd starrocks-on-eks-workshop/cdk-stack/
 pip3 install -r requirement.txt
 cdk bootstrap
 cdk deploy
+```
 
+* 记录以下CDK输出
+
+```
+xxxx
+```
+
+### 准备基础数据
+* 配置相关环境变量
+```
+Admin:~/environment $ export DB_USERNAME=admin
+Admin:~/environment $ export DB_PASSWORD=starrocks
+Admin:~/environment $ export DB_HOST=<您的aurora writer endpoint>
+有问题：Admin:~/environment $ export STARROCKS_JDBC_HOST=k8s-starrock-astarroc-2606d8b1bf-bfe3718aa734999f.elb.us-east-1.amazonaws.com
+有问题：Admin:~/environment $ export STARROCKS_LOAD_HOST=k8s-starrock-astarroc-a2f8705a78-adbc392a7a321fc0.elb.us-east-1.amazonaws.com
+```
+* 导入数据到Aurora Mysql
+```
+Admin:~/environment $ python3 load_events.py 
 ```
