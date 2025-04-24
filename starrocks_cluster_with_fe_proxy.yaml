@@ -22,6 +22,8 @@ spec:
       memory: 8Gi
     service:
       type: LoadBalancer   # export fe service
+      annotations:
+        service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
       ports:
       - name: query   # fill the name from the fe service ports
         nodePort: 32755
@@ -46,6 +48,8 @@ spec:
       memory: 8Gi
     service:
       type: LoadBalancer   # export fe proxy service
+      annotations:
+        service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
       ports:
         - name: http-port   # fill the name from the fe proxy service ports
           containerPort: 8080
