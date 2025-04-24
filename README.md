@@ -168,3 +168,13 @@ curl -O https://raw.githubusercontent.com/StarRocks/starrocks-kubernetes-operato
 ```
 Admin:~/environment $ kubectl get deployment -n starrocks
 ```
+* 部署Starrocks集群
+```
+kubectl apply -f starrocks_cluster_with_fe_proxy.yaml
+```
+
+
+* 查看pod部署情况
+```
+Admin:~/environment $ kubectl get pod -n starrocks 
+```
