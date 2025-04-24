@@ -342,8 +342,129 @@ PROPERTIES (
     "replication_num" = "1"
 );
 ```
+* 提交导入作业
+```
+
+LOAD LABEL game_events
+(
+    DATA INFILE("s3://starrocks-on-eks-workshop-436103886277-us-east-1/game_events.csv")
+    INTO TABLE game_events
+    COLUMNS TERMINATED BY ','
+    FORMAT AS "CSV"
+    (
+        skip_header = 1
+        enclose = "\""
+    )
+)
+WITH BROKER
+(
+    "aws.s3.enable_ssl" = "true",
+    "aws.s3.use_instance_profile" = "false",
+    "aws.s3.region" = "us-east-1",
+    "aws.s3.access_key" = "<您的AK>",
+    "aws.s3.secret_key" = "<您的SK>"
+)
+PROPERTIES
+(
+    "timeout" = "72000"
+);
 
 
+LOAD LABEL game_progress
+(
+    DATA INFILE("s3://starrocks-on-eks-workshop-436103886277-us-east-1/game_progress.csv")
+    INTO TABLE game_progress
+    COLUMNS TERMINATED BY ','
+    FORMAT AS "CSV"
+    (
+        skip_header = 1
+    )
+)
+WITH BROKER
+(
+    "aws.s3.enable_ssl" = "true",
+    "aws.s3.use_instance_profile" = "false",
+    "aws.s3.region" = "us-east-1",
+    "aws.s3.access_key" = "<您的AK>",
+    "aws.s3.secret_key" = "<您的SK>"
+)
+PROPERTIES
+(
+    "timeout" = "72000"
+);
+
+
+LOAD LABEL payment_transactions
+(
+    DATA INFILE("s3://starrocks-on-eks-workshop-436103886277-us-east-1/payment_transactions.csv")
+    INTO TABLE payment_transactions
+    COLUMNS TERMINATED BY ','
+    FORMAT AS "CSV"
+    (
+        skip_header = 1
+    )
+)
+WITH BROKER
+(
+    "aws.s3.enable_ssl" = "true",
+    "aws.s3.use_instance_profile" = "false",
+    "aws.s3.region" = "us-east-1",
+    "aws.s3.access_key" = "<您的AK>",
+    "aws.s3.secret_key" = "<您的SK>"
+)
+PROPERTIES
+(
+    "timeout" = "72000"
+);
+
+
+LOAD LABEL user_login
+(
+    DATA INFILE("s3://starrocks-on-eks-workshop-436103886277-us-east-1/user_login.csv")
+    INTO TABLE user_login
+    COLUMNS TERMINATED BY ','
+    FORMAT AS "CSV"
+    (
+        skip_header = 1
+    )
+)
+WITH BROKER
+(
+    "aws.s3.enable_ssl" = "true",
+    "aws.s3.use_instance_profile" = "false",
+    "aws.s3.region" = "us-east-1",
+    "aws.s3.access_key" = "<您的AK>",
+    "aws.s3.secret_key" = "<您的SK>"
+)
+PROPERTIES
+(
+    "timeout" = "72000"
+);
+
+LOAD LABEL user_profile
+(
+    DATA INFILE("s3://starrocks-on-eks-workshop-436103886277-us-east-1/user_profile.csv")
+    INTO TABLE user_profile
+    COLUMNS TERMINATED BY ','
+    FORMAT AS "CSV"
+    (
+        skip_header = 1
+    )
+)
+WITH BROKER
+(
+    "aws.s3.enable_ssl" = "true",
+    "aws.s3.use_instance_profile" = "false",
+    "aws.s3.region" = "us-east-1",
+    "aws.s3.access_key" = "<您的AK>",
+    "aws.s3.secret_key" = "<您的SK>"
+)
+PROPERTIES
+(
+    "timeout" = "72000"
+);
+
+```
 
 
 
