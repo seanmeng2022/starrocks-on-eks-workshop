@@ -60,8 +60,6 @@ arn:aws:cloudformation:us-east-1:436103886277:stack/StarrocksOnEksStack/6aad7a70
 Admin:~/environment $ export DB_USERNAME=admin
 Admin:~/environment $ export DB_PASSWORD=starrocks
 Admin:~/environment $ export DB_HOST=<您的aurora writer endpoint>
-有问题：Admin:~/environment $ export STARROCKS_JDBC_HOST=k8s-starrock-astarroc-2606d8b1bf-bfe3718aa734999f.elb.us-east-1.amazonaws.com
-有问题：Admin:~/environment $ export STARROCKS_LOAD_HOST=k8s-starrock-astarroc-a2f8705a78-adbc392a7a321fc0.elb.us-east-1.amazonaws.com
 ```
 * 导入数据到Aurora Mysql
 ```
