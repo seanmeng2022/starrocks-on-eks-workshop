@@ -140,7 +140,8 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
 eksctl create addon \
     --name aws-ebs-csi-driver \
     --cluster $EKS_Cluster_ID \
-    --service-account-role-arn arn:aws:iam::${AWS_Account_ID}:role/AmazonEKS_EBS_CSI_DriverRole 
+    --service-account-role-arn arn:aws:iam::${AWS_Account_ID}:role/AmazonEKS_EBS_CSI_DriverRole \
+    --force 
 ```
 
 * 应用新的gp3 SC
