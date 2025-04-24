@@ -501,7 +501,17 @@ Admin:~/environment/flink-cdc/docker $ docker build -t $ECR_ID:latest .
 ```
 Admin:~/environment/flink-cdc/docker $ docker push $ECR_ID:latest
 ```
+* 创建Flink-CDC ConfigMap
+```
+Admin:~/environment/flink-cdc $ envsubst < flinkcdc-configmap.yaml | kubectl apply -f -
 
+```
+
+
+* 提交Flink-CDC Job
+```
+Admin:~/environment/flink-cdc $ envsubst < flink-cdc-pipeline-job.yaml | kubectl apply -f -
+```
 
 
 
