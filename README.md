@@ -148,3 +148,23 @@ eksctl create addon \
 ```
 kubectl apply -f gp3-sc.yaml
 ```
+## Starrocks存算一体部署模式
+* 添加Custom Resource：StarRocksCluster
+```
+kubectl apply -f https://raw.githubusercontent.com/StarRocks/starrocks-kubernetes-operator/main/deploy/starrocks.com_starrocksclusters.yaml
+```
+
+* 使用默认部署StarRocks Operator
+```
+kubectl apply -f https://raw.githubusercontent.com/StarRocks/starrocks-kubernetes-operator/main/deploy/operator.yaml
+
+```
+* (Optional）或下载operator.yaml，自定义部署
+```
+curl -O https://raw.githubusercontent.com/StarRocks/starrocks-kubernetes-operator/main/deploy/operator.yaml
+```
+
+* 查看operator部署状态
+```
+Admin:~/environment $ kubectl get deployment -n starrocks
+```
