@@ -73,3 +73,37 @@ Admin:~/environment $ python3 load_events.py
 ```
 Admin:~/environment/starrocks-on-eks-workshop (main) $ aws eks update-kubeconfig --name StarrocksEKSCluster3A432E2B-bb3cea276eb24eb8a36a274fcee16316 --region us-east-1 --role-arn arn:aws:iam::436103886277:role/StarrocksOnEksStack-EksMastersRoleD1AE213C-E95o0FOZ5SKh
 ```
+* 配置环境变量
+```
+export EKS_Cluster_ID=<您的集群ID>
+export AWS_Account_ID=<您的aws账号ID>
+这里有问题要看下：export ECR_ID=<您的ECR地址>
+```
+
+* 开启OpenID Provider
+```
+eksctl utils associate-iam-oidc-provider \
+    --cluster $EKS_Cluster_ID \
+    --approve
+```
+
+* 添加user
+```
+Admin:~/environment $ kubectl get configmap aws-auth -n kube-system -o yaml > aws-auth-configmap.yaml
+
+这里有问题：Admin:~/environment $ kubectl patch configmap aws-auth -n kube-system --patch '{"data": {"mapUsers": "- userarn: arn:aws:iam::436103886277:user/Sean\n  username: Sean\n  groups:\n    - system:masters"}}'
+```
+
+
+* 创建CSI Controller的IAM Role和SA
+```
+eksctl create iamserviceaccount \
+    --name ebs-csi-controller-sa \
+    --namespace kube-system \
+    --cluster $EKS_Cluster_ID \
+    --role-name AmazonEKS_EBS_CSI_DriverRole \
+    --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy \
+    --approve
+```
+
+
