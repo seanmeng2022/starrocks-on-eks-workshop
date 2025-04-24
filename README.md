@@ -198,4 +198,10 @@ a-starrocks-with-fe-proxy-fe-proxy-service   LoadBalancer   172.20.245.252   k8s
 a-starrocks-with-fe-proxy-fe-search          ClusterIP      None             <none>                                                                          9030/TCP                                                      3m13s
 a-starrocks-with-fe-proxy-fe-service         LoadBalancer   172.20.243.241   k8s-starrock-astarroc-1eca21357b-201a35ab525806f4.elb.us-east-1.amazonaws.com   8030:31854/TCP,9020:31172/TCP,9030:32755/TCP,9010:30884/TCP   3m13s
 ```
+* 配置环境变量
+```
+Admin:~/environment $ export STARROCKS_JDBC_HOST=<a-starrocks-with-fe-proxy-fe-service对应的EXTERNAL-IP地址>
+Admin:~/environment $ export STARROCKS_LOAD_HOST=<a-starrocks-with-fe-proxy-fe-proxy-service对应的EXTERNAL-IP地址>
+```
+
 
