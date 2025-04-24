@@ -465,7 +465,10 @@ PROPERTIES
 );
 
 ```
-
+* 您可以通过如下SQL查看导入进度
+```
+MySQL [workshop_db_s3]> SELECT * FROM information_schema.loads WHERE LABEL = 'game_events';
+```
 
 
 
