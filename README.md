@@ -149,6 +149,7 @@ eksctl create addon \
 kubectl apply -f gp3-sc.yaml
 ```
 ## Starrocks存算一体部署模式
+### 部署Starrocks集群
 * 添加Custom Resource：StarRocksCluster
 ```
 kubectl apply -f https://raw.githubusercontent.com/StarRocks/starrocks-kubernetes-operator/main/deploy/starrocks.com_starrocksclusters.yaml
@@ -188,6 +189,47 @@ a-starrocks-with-fe-proxy-fe-proxy-b9b64454d-4v5w4   1/1     Running   0        
 a-starrocks-with-fe-proxy-fe-proxy-b9b64454d-rmcfg   1/1     Running   0          52s
 kube-starrocks-operator-6dd67ccf-4fpts               1/1     Running   0          4m7s
 ```
+### S3批量同步数据到Starrocks
+* 上传数据至S3
+```
+aws s3 cp dataset/ s3://<您的S3存储桶ID> --recursive
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 * 查看相关service地址
 ```
 Admin:~/environment/starrocks-on-eks-workshop (main) $ kubectl  get svc -n starrocks
@@ -198,6 +240,18 @@ a-starrocks-with-fe-proxy-fe-proxy-service   LoadBalancer   172.20.245.252   k8s
 a-starrocks-with-fe-proxy-fe-search          ClusterIP      None             <none>                                                                          9030/TCP                                                      3m13s
 a-starrocks-with-fe-proxy-fe-service         LoadBalancer   172.20.243.241   k8s-starrock-astarroc-1eca21357b-201a35ab525806f4.elb.us-east-1.amazonaws.com   8030:31854/TCP,9020:31172/TCP,9030:32755/TCP,9010:30884/TCP   3m13s
 ```
+
+
+
+
+
+
+
+
+
+
+
+
 * 配置环境变量
 ```
 Admin:~/environment $ export STARROCKS_JDBC_HOST=<a-starrocks-with-fe-proxy-fe-service对应的EXTERNAL-IP地址>
