@@ -67,3 +67,9 @@ Admin:~/environment $ export DB_HOST=<您的aurora writer endpoint>
 ```
 Admin:~/environment $ python3 load_events.py 
 ```
+
+### 配置EKS
+* 配置EKS访问权限
+```
+Admin:~/environment/starrocks-on-eks-workshop (main) $ aws eks update-kubeconfig --name StarrocksEKSCluster3A432E2B-bb3cea276eb24eb8a36a274fcee16316 --region us-east-1 --role-arn arn:aws:iam::436103886277:role/StarrocksOnEksStack-EksMastersRoleD1AE213C-E95o0FOZ5SKh
+```
