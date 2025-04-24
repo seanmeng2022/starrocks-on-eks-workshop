@@ -174,7 +174,28 @@ kubectl apply -f starrocks_cluster_with_fe_proxy.yaml
 ```
 
 
-* 查看pod部署情况
+* 查看pod部署情况，等待所有fe，be pod部署完成
 ```
-Admin:~/environment $ kubectl get pod -n starrocks 
+Admin:~/environment/starrocks-on-eks-workshop (main) $ kubectl get pod -n starrocks 
+NAME                                                 READY   STATUS    RESTARTS   AGE
+a-starrocks-with-fe-proxy-be-0                       1/1     Running   0          52s
+a-starrocks-with-fe-proxy-be-1                       1/1     Running   0          52s
+a-starrocks-with-fe-proxy-be-2                       1/1     Running   0          52s
+a-starrocks-with-fe-proxy-fe-0                       1/1     Running   0          2m7s
+a-starrocks-with-fe-proxy-fe-1                       1/1     Running   0          2m7s
+a-starrocks-with-fe-proxy-fe-2                       1/1     Running   0          2m7s
+a-starrocks-with-fe-proxy-fe-proxy-b9b64454d-4v5w4   1/1     Running   0          52s
+a-starrocks-with-fe-proxy-fe-proxy-b9b64454d-rmcfg   1/1     Running   0          52s
+kube-starrocks-operator-6dd67ccf-4fpts               1/1     Running   0          4m7s
 ```
+* 查看相关service地址
+```
+Admin:~/environment/starrocks-on-eks-workshop (main) $ kubectl  get svc -n starrocks
+NAME                                         TYPE           CLUSTER-IP       EXTERNAL-IP                                                                     PORT(S)                                                       AGE
+a-starrocks-with-fe-proxy-be-search          ClusterIP      None             <none>                                                                          9050/TCP                                                      118s
+a-starrocks-with-fe-proxy-be-service         ClusterIP      172.20.45.148    <none>                                                                          9060/TCP,8040/TCP,9050/TCP,8060/TCP                           118s
+a-starrocks-with-fe-proxy-fe-proxy-service   LoadBalancer   172.20.245.252   k8s-starrock-astarroc-58cb41cfa5-564177aa162318c5.elb.us-east-1.amazonaws.com   8080:30180/TCP                                                118s
+a-starrocks-with-fe-proxy-fe-search          ClusterIP      None             <none>                                                                          9030/TCP                                                      3m13s
+a-starrocks-with-fe-proxy-fe-service         LoadBalancer   172.20.243.241   k8s-starrock-astarroc-1eca21357b-201a35ab525806f4.elb.us-east-1.amazonaws.com   8030:31854/TCP,9020:31172/TCP,9030:32755/TCP,9010:30884/TCP   3m13s
+```
+
