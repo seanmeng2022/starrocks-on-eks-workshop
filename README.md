@@ -106,4 +106,44 @@ eksctl create iamserviceaccount \
     --approve
 ```
 
+* 创建ELB Controller的IAM Role和SA
+```
+curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.11.0/docs/install/iam_policy.json
 
+aws iam create-policy \
+    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-document file://iam_policy.json
+    
+
+eksctl create iamserviceaccount \
+    --name lb-controller-sa \
+    --namespace kube-system \
+    --cluster $EKS_Cluster_ID \
+    --role-name AmazonEKSLoadBalancerControllerRole \
+    --attach-policy-arn=arn:aws:iam::${AWS_Account_ID}:policy/AWSLoadBalancerControllerIAMPolicy \
+    --approve 
+
+```
+
+* 安装load balancer controller
+```
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+  -n kube-system \
+  --set clusterName=$EKS_Cluster_ID\
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=lb-controller-sa
+
+```
+
+* 安装ebs csi driver
+```
+eksctl create addon \
+    --name aws-ebs-csi-driver \
+    --cluster $EKS_Cluster_ID \
+    --service-account-role-arn arn:aws:iam::${AWS_Account_ID}:role/AmazonEKS_EBS_CSI_DriverRole 
+```
+
+* 应用新的gp3 SC
+```
+kubectl apply -f gp3-sc.yaml
+```
