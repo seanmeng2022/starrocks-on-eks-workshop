@@ -77,7 +77,7 @@ Admin:~/environment/starrocks-on-eks-workshop (main) $ aws eks update-kubeconfig
 ```
 export EKS_Cluster_ID=<您的集群ID>
 export AWS_Account_ID=<您的aws账号ID>
-这里有问题要看下：export ECR_ID=<您的ECR地址>
+export ECR_ID=<您的ECR地址>
 ```
 
 * 开启OpenID Provider
@@ -470,13 +470,37 @@ PROPERTIES
 MySQL [workshop_db_s3]> SELECT * FROM information_schema.loads WHERE LABEL = 'game_events';
 ```
 
+### Mysql实时同步数据到Starrocks
+* 安装cert manger
+```
+Admin:~/environment $ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.8.2/cert-manager.yaml
 
+```
+* 安装flink operator
+```
+Admin:~/environment $ kubectl create ns flinkcdc 
+Admin:~/environment $ helm install flink-kubernetes-operator flink-operator-repo/flink-kubernetes-operator --namespace flinkcdc
 
+```
+* 查看operator状态
+```
+Admin:~/environment/starrocks-on-eks-workshop (main) $ kubectl get pods -n flinkcdc
+NAME                                        READY   STATUS    RESTARTS   AGE
+flink-kubernetes-operator-f8997bf9d-99k24   2/2     Running   0          51s
+```
+* 登录ECR仓库
+```
+Admin:~/environment $ aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${AWS_Account_ID}.dkr.ecr.us-east-1.amazonaws.com
+```
+* 构建Docker镜像
+```
+Admin:~/environment/flink-cdc/docker $ docker build -t $ECR_ID:latest .
+```
 
-
-
-
-
+* 上传Docker镜像
+```
+Admin:~/environment/flink-cdc/docker $ docker push $ECR_ID:latest
+```
 
 
 
