@@ -189,47 +189,6 @@ a-starrocks-with-fe-proxy-fe-proxy-b9b64454d-4v5w4   1/1     Running   0        
 a-starrocks-with-fe-proxy-fe-proxy-b9b64454d-rmcfg   1/1     Running   0          52s
 kube-starrocks-operator-6dd67ccf-4fpts               1/1     Running   0          4m7s
 ```
-### S3批量同步数据到Starrocks
-* 上传数据至S3
-```
-aws s3 cp dataset/ s3://<您的S3存储桶ID> --recursive
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 * 查看相关service地址
 ```
 Admin:~/environment/starrocks-on-eks-workshop (main) $ kubectl  get svc -n starrocks
@@ -241,21 +200,180 @@ a-starrocks-with-fe-proxy-fe-search          ClusterIP      None             <no
 a-starrocks-with-fe-proxy-fe-service         LoadBalancer   172.20.243.241   k8s-starrock-astarroc-1eca21357b-201a35ab525806f4.elb.us-east-1.amazonaws.com   8030:31854/TCP,9020:31172/TCP,9030:32755/TCP,9010:30884/TCP   3m13s
 ```
 
-
-
-
-
-
-
-
-
-
-
-
 * 配置环境变量
 ```
 Admin:~/environment $ export STARROCKS_JDBC_HOST=<a-starrocks-with-fe-proxy-fe-service对应的EXTERNAL-IP地址>
 Admin:~/environment $ export STARROCKS_LOAD_HOST=<a-starrocks-with-fe-proxy-fe-proxy-service对应的EXTERNAL-IP地址>
 ```
+
+
+### S3批量同步数据到Starrocks
+* 上传dataset数据至S3
+```
+aws s3 cp dataset/ s3://<您的S3存储桶ID> --recursive
+```
+* 登录Starrocks，创建workshop_db_s3
+```
+Admin:~/environment $ mysql -h $STARROCKS_JDBC_HOST -P 9030 -u root
+```
+* 登录Starrocks集群，创建workshop_db_s3
+```
+Admin:~/environment/starrocks-on-eks-workshop (main) $ mysql -h $STARROCKS_JDBC_HOST -P 9030 -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 5997
+Server version: 8.0.33 3.4.2-c15ba7c
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> create database workshop_db_s3;
+Query OK, 0 rows affected (0.015 sec)
+
+MySQL [(none)]> use workshop_db_s3;
+Database changed
+```
+
+* 创建相关数据表
+```
+-- Create game_events table
+CREATE TABLE IF NOT EXISTS game_events (
+    event_id INT NOT NULL COMMENT "",
+    user_id INT NULL COMMENT "",
+    event_time DATETIME NULL COMMENT "",
+    event_type VARCHAR(50) NULL COMMENT "",
+    event_detail TEXT NULL COMMENT "",
+    level_id INT NULL COMMENT "",
+    result VARCHAR(10) NULL COMMENT "",
+    duration INT NULL COMMENT ""
+) ENGINE=OLAP 
+PRIMARY KEY(event_id)
+DISTRIBUTED BY HASH(event_id)
+PROPERTIES (
+    "compression" = "LZ4",
+    "enable_persistent_index" = "true",
+    "fast_schema_evolution" = "true",
+    "replicated_storage" = "true",
+    "replication_num" = "1"
+);
+
+-- Create game_progress table
+CREATE TABLE IF NOT EXISTS game_progress (
+    progress_id INT NOT NULL COMMENT "",
+    user_id INT NULL COMMENT "",
+    level INT NULL COMMENT "",
+    experience INT NULL COMMENT "",
+    game_coins INT NULL COMMENT "",
+    diamonds INT NULL COMMENT "",
+    update_time DATETIME NULL COMMENT "",
+    total_play_time INT NULL COMMENT ""
+) ENGINE=OLAP 
+PRIMARY KEY(progress_id)
+DISTRIBUTED BY HASH(progress_id)
+PROPERTIES (
+    "compression" = "LZ4",
+    "enable_persistent_index" = "true",
+    "fast_schema_evolution" = "true",
+    "replicated_storage" = "true",
+    "replication_num" = "1"
+);
+
+-- Create payment_transactions table
+CREATE TABLE IF NOT EXISTS payment_transactions (
+    transaction_id INT NOT NULL COMMENT "",
+    user_id INT NULL COMMENT "",
+    transaction_time DATETIME NULL COMMENT "",
+    amount DECIMAL(10,2) NULL COMMENT "",
+    payment_method VARCHAR(50) NULL COMMENT "",
+    currency VARCHAR(10) NULL COMMENT "",
+    item_id INT NULL COMMENT "",
+    item_name VARCHAR(100) NULL COMMENT "",
+    item_type VARCHAR(50) NULL COMMENT ""
+) ENGINE=OLAP 
+PRIMARY KEY(transaction_id)
+DISTRIBUTED BY HASH(transaction_id)
+PROPERTIES (
+    "compression" = "LZ4",
+    "enable_persistent_index" = "true",
+    "fast_schema_evolution" = "true",
+    "replicated_storage" = "true",
+    "replication_num" = "1"
+);
+
+-- Create user_login table
+CREATE TABLE IF NOT EXISTS user_login (
+    login_id INT NOT NULL COMMENT "",
+    user_id INT NULL COMMENT "",
+    login_time DATETIME NULL COMMENT "",
+    logout_time DATETIME NULL COMMENT "",
+    session_length INT NULL COMMENT "",
+    ip_address VARCHAR(50) NULL COMMENT "",
+    device_id VARCHAR(50) NULL COMMENT ""
+) ENGINE=OLAP 
+PRIMARY KEY(login_id)
+DISTRIBUTED BY HASH(login_id)
+PROPERTIES (
+    "compression" = "LZ4",
+    "enable_persistent_index" = "true",
+    "fast_schema_evolution" = "true",
+    "replicated_storage" = "true",
+    "replication_num" = "1"
+);
+
+-- Create user_profile table
+CREATE TABLE IF NOT EXISTS user_profile (
+    user_id INT NOT NULL COMMENT "",
+    register_time DATETIME NULL COMMENT "",
+    channel VARCHAR(50) NULL COMMENT "",
+    device_type VARCHAR(50) NULL COMMENT "",
+    os_version VARCHAR(50) NULL COMMENT "",
+    region VARCHAR(50) NULL COMMENT "",
+    gender VARCHAR(10) NULL COMMENT "",
+    age INT NULL COMMENT "",
+    vip_level INT NULL COMMENT ""
+) ENGINE=OLAP 
+PRIMARY KEY(user_id)
+DISTRIBUTED BY HASH(user_id)
+PROPERTIES (
+    "compression" = "LZ4",
+    "enable_persistent_index" = "true",
+    "fast_schema_evolution" = "true",
+    "replicated_storage" = "true",
+    "replication_num" = "1"
+);
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
