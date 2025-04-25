@@ -517,6 +517,18 @@ Admin:~/environment/flink-cdc $ envsubst < flink-cdc-pipeline-job.yaml | kubectl
 
 
 
+## 存算分离部署模式
+### 清除前期资源
+如果您的集群中已经部署了第二章存算一体Starrocks集群，可以先将资源清除。
+* 删除Starrocks集群
+```
+Admin:~/environment/starrocks-on-eks-workshop (main) $ kubectl delete -f starrocks_cluster_with_fe_proxy.yaml
+
+```
+
+
+
+
 
 
 
