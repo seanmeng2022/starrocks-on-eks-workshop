@@ -1,6 +1,6 @@
 # Starrocks on EKS workshop
 ## 说明
-该workshop会针对Starrocks在AWS EKS上的部署进行逐步演示和说明。
+该workshop会针对Starrocks在AWS EKS上的部署（包括存算一体，存算分离模式），和相关数据同步方式（批同步，CDC同步）进行说明和Demo。
 
 ## 环境准备
 
@@ -31,7 +31,7 @@ Default output format [None]:
 ```
 Admin:~/environment $ sh starrocks-on-eks-workshop/cloud9/cloud9.sh 
 ```
-* 部署cdk资源----这里要添加writer endpoint的输出
+* 部署cdk资源
 ```
 Admin:~/environment $ cd starrocks-on-eks-workshop/cdk-stack/
 Admin:~/environment $ pip3 install -r requirement.txt
@@ -39,7 +39,11 @@ Admin:~/environment $ cdk bootstrap
 Admin:~/environment $ cdk deploy
 ```
 
-* 记录以下CDK输出
+* 记录以下CDK输出，其中：
+    *  StarrocksOnEksStack.BucketName，后续存放数据集的S3桶
+    *  StarrocksOnEksStack.WriterEndpoint，Aurora Cluster的写入Endpoint，后续数据会同步写入到Aurora
+    *  StarrocksOnEksStack.EKSClusterName，EKS集群ID
+    *  
 
 ```
 Outputs:
