@@ -523,20 +523,187 @@ Admin:~/environment/flink-cdc $ envsubst < flink-cdc-pipeline-job.yaml | kubectl
 * 删除Starrocks集群
 ```
 Admin:~/environment/starrocks-on-eks-workshop (main) $ kubectl delete -f starrocks_cluster_with_fe_proxy.yaml
+Admin:~/environment/starrocks-on-eks-workshop/flink-cdc (main) $ kubectl delete -f flink-cdc-pipeline-job.yaml
+```
+
+### 部署存算分离Starrocks集群
+* 部署集群
+```
+Admin:~/environment (main) $ kubectl apply -f starrocks_cluster_shared_data_mode.yaml 
+
+```
+
+* 确认FE，BE pod已正常启动
+```
+Admin:~/environment/starrocks-on-eks-workshop (main) $ kubectl get pod -n starrocks 
+NAME                                                       READY   STATUS    RESTARTS   AGE
+a-starrocks-in-share-data-mode-cn-0                        1/1     Running   0          2m24s
+a-starrocks-in-share-data-mode-cn-1                        1/1     Running   0          2m24s
+a-starrocks-in-share-data-mode-cn-2                        1/1     Running   0          2m24s
+a-starrocks-in-share-data-mode-fe-0                        1/1     Running   0          3m9s
+a-starrocks-in-share-data-mode-fe-1                        1/1     Running   0          3m9s
+a-starrocks-in-share-data-mode-fe-2                        1/1     Running   0          3m9s
+a-starrocks-in-share-data-mode-fe-proxy-6775cd659d-qv7zq   1/1     Running   0          2m24s
+a-starrocks-in-share-data-mode-fe-proxy-6775cd659d-rt4rz   1/1     Running   0          2m24s
+kube-starrocks-operator-6dd67ccf-4fpts                     1/1     Running   0          27h
+
+
+Admin:~/environment/starrocks-on-eks-workshop (main) $ kubectl get svc -n starrocks
+NAME                                              TYPE           CLUSTER-IP       EXTERNAL-IP                                                                     PORT(S)                                                       AGE
+a-starrocks-in-share-data-mode-cn-search          ClusterIP      None             <none>                                                                          9050/TCP                                                      3m57s
+a-starrocks-in-share-data-mode-cn-service         ClusterIP      172.20.29.125    <none>                                                                          9060/TCP,8040/TCP,9050/TCP,8060/TCP                           3m57s
+a-starrocks-in-share-data-mode-fe-proxy-service   LoadBalancer   172.20.155.46    k8s-starrock-astarroc-9c493cedcb-3e77538ba6ecf2ce.elb.us-east-1.amazonaws.com   8080:30180/TCP                                                3m57s
+a-starrocks-in-share-data-mode-fe-search          ClusterIP      None             <none>                                                                          9030/TCP                                                      4m42s
+a-starrocks-in-share-data-mode-fe-service         LoadBalancer   172.20.120.188   k8s-starrock-astarroc-602a0cdd84-3f9fad20e72d8118.elb.us-east-1.amazonaws.com   8030:31944/TCP,9020:31284/TCP,9030:32516/TCP,9010:30699/TCP   4m42s
+```
+
+* 配置相关环境变量
+```
+Admin:~/environment/starrocks-on-eks-workshop (main) $ export STARROCKS_JDBC_HOST=k8s-starrock-astarroc-602a0cdd84-3f9fad20e72d8118.elb.us-east-1.amazonaws.com
+Admin:~/environment/starrocks-on-eks-workshop (main) $ export STARROCKS_LOAD_HOST=k8s-starrock-astarroc-9c493cedcb-3e77538ba6ecf2ce.elb.us-east-1.amazonaws.com
+```
+
+* 登录Starrocks
+```
+Admin:~/environment (main) $ mysql -h $STARROCKS_JDBC_HOST -P 9030 -u root
+```
+* 基于S3，创建默认存储卷
+```
+CREATE STORAGE VOLUME def_volume
+TYPE = S3
+LOCATIONS = ("s3://<您的Bucket Name>")
+PROPERTIES
+(
+    "enabled" = "true",
+    "aws.s3.region" = "us-east-1",
+    "aws.s3.endpoint" = "https://s3.us-east-1.amazonaws.com",
+    "aws.s3.use_aws_sdk_default_behavior" = "false",
+    "aws.s3.use_instance_profile" = "false",
+    "aws.s3.access_key" = "<您的AK>",
+    "aws.s3.secret_key" = "<您的SK>",
+    "aws.s3.enable_partitioned_prefix" = "true"
+);
+
+
+SET def_volume AS DEFAULT STORAGE VOLUME;
+
+```
+
+* 确认已配置成功
+```
+MySQL [(none)]> DESC STORAGE VOLUME def_volume\G
+*************************** 1. row ***************************
+     Name: def_volume
+     Type: S3
+IsDefault: true
+ Location: s3://starrocks-on-eks-workshop-436103886277-us-east-1
+   Params: {"aws.s3.access_key":"******","aws.s3.secret_key":"******","aws.s3.num_partitioned_prefix":"256","aws.s3.endpoint":"https://s3.us-east-1.amazonaws.com","aws.s3.region":"us-east-1","aws.s3.use_instance_profile":"false","aws.s3.enable_partitioned_prefix":"true","aws.s3.use_aws_sdk_default_behavior":"false"}
+  Enabled: true
+  Comment: 
+1 row in set (0.042 sec)
 
 ```
 
 
+* 创建数据库和云原生表
+```
+MySQL [(none)]> CREATE DATABASE workshop_db_s3_shared_data;
+Query OK, 0 rows affected (0.016 sec)
+
+MySQL [(none)]> use workshop_db_s3_shared_data;
+Database changed
 
 
+CREATE TABLE IF NOT EXISTS game_events (
+    event_id INT NOT NULL COMMENT "",
+    user_id INT NULL COMMENT "",
+    event_time DATETIME NULL COMMENT "",
+    event_type VARCHAR(50) NULL COMMENT "",
+    event_detail TEXT NULL COMMENT "",
+    level_id INT NULL COMMENT "",
+    result VARCHAR(10) NULL COMMENT "",
+    duration INT NULL COMMENT ""
+) ENGINE=OLAP 
+PRIMARY KEY(event_id)
+DISTRIBUTED BY HASH(event_id)
+PROPERTIES (
+    "storage_volume" = "def_volume",
+    "datacache.enable" = "true"
+);
 
+-- Create game_progress table
+CREATE TABLE IF NOT EXISTS game_progress (
+    progress_id INT NOT NULL COMMENT "",
+    user_id INT NULL COMMENT "",
+    level INT NULL COMMENT "",
+    experience INT NULL COMMENT "",
+    game_coins INT NULL COMMENT "",
+    diamonds INT NULL COMMENT "",
+    update_time DATETIME NULL COMMENT "",
+    total_play_time INT NULL COMMENT ""
+) ENGINE=OLAP 
+PRIMARY KEY(progress_id)
+DISTRIBUTED BY HASH(progress_id)
+PROPERTIES (
+    "storage_volume" = "def_volume",
+    "datacache.enable" = "true"
+);
 
+-- Create payment_transactions table
+CREATE TABLE IF NOT EXISTS payment_transactions (
+    transaction_id INT NOT NULL COMMENT "",
+    user_id INT NULL COMMENT "",
+    transaction_time DATETIME NULL COMMENT "",
+    amount DECIMAL(10,2) NULL COMMENT "",
+    payment_method VARCHAR(50) NULL COMMENT "",
+    currency VARCHAR(10) NULL COMMENT "",
+    item_id INT NULL COMMENT "",
+    item_name VARCHAR(100) NULL COMMENT "",
+    item_type VARCHAR(50) NULL COMMENT ""
+) ENGINE=OLAP 
+PRIMARY KEY(transaction_id)
+DISTRIBUTED BY HASH(transaction_id)
+PROPERTIES (
+    "storage_volume" = "def_volume",
+    "datacache.enable" = "true"
+);
 
+-- Create user_login table
+CREATE TABLE IF NOT EXISTS user_login (
+    login_id INT NOT NULL COMMENT "",
+    user_id INT NULL COMMENT "",
+    login_time DATETIME NULL COMMENT "",
+    logout_time DATETIME NULL COMMENT "",
+    session_length INT NULL COMMENT "",
+    ip_address VARCHAR(50) NULL COMMENT "",
+    device_id VARCHAR(50) NULL COMMENT ""
+) ENGINE=OLAP 
+PRIMARY KEY(login_id)
+DISTRIBUTED BY HASH(login_id)
+PROPERTIES (
+    "storage_volume" = "def_volume",
+    "datacache.enable" = "true"
+);
 
-
-
-
-
+-- Create user_profile table
+CREATE TABLE IF NOT EXISTS user_profile (
+    user_id INT NOT NULL COMMENT "",
+    register_time DATETIME NULL COMMENT "",
+    channel VARCHAR(50) NULL COMMENT "",
+    device_type VARCHAR(50) NULL COMMENT "",
+    os_version VARCHAR(50) NULL COMMENT "",
+    region VARCHAR(50) NULL COMMENT "",
+    gender VARCHAR(10) NULL COMMENT "",
+    age INT NULL COMMENT "",
+    vip_level INT NULL COMMENT ""
+) ENGINE=OLAP 
+PRIMARY KEY(user_id)
+DISTRIBUTED BY HASH(user_id)
+PROPERTIES (
+    "storage_volume" = "def_volume",
+    "datacache.enable" = "true"
+);
+```
 
 
 
