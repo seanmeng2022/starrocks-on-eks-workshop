@@ -209,7 +209,7 @@ Admin:~/environment $ export STARROCKS_LOAD_HOST=<a-starrocks-with-fe-proxy-fe-p
 ```
 
 
-##部署存算分离模式Starrocks集群（Optional）
+## 部署存算分离模式Starrocks集群（Optional）
 ### 部署集群
 ```
 Admin:~/environment (main) $ kubectl apply -f starrocks_cluster_shared_data_mode.yaml 
@@ -390,7 +390,7 @@ PROPERTIES (
 
 
 
-
+## 数据同步
 ### S3批量同步数据到Starrocks
 * 上传dataset数据至S3
 ```
