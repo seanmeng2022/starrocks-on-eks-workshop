@@ -2,6 +2,7 @@
 ## 说明
 该workshop会针对Starrocks在AWS EKS上的部署（包括存算一体，存算分离模式），和相关数据同步方式（批同步，CDC同步）进行说明和Demo。
 
+
 ## 环境准备
 
 ### 搭建基础环境（Cloud9/VPC/EKS/Aurora等）
@@ -39,11 +40,6 @@ Admin:~/environment $ cdk bootstrap
 Admin:~/environment $ cdk deploy
 ```
 
-* 记录以下CDK输出，其中：
-    *  StarrocksOnEksStack.BucketName，后续存放数据集的S3桶
-    *  StarrocksOnEksStack.WriterEndpoint，Aurora Cluster的写入Endpoint，后续数据会同步写入到Aurora
-    *  StarrocksOnEksStack.EKSClusterName，EKS集群ID
-    *  
 
 ```
 Outputs:
@@ -51,6 +47,7 @@ StarrocksOnEksStack.BucketName = starrocks-on-eks-workshop-436103886277-us-east-
 StarrocksOnEksStack.ClusterEndpoint = starrocksoneksstack-auroracluster23d869c0-3dezvmq1vogu.cluster-co2wcr3kjcuz.us-east-1.rds.amazonaws.com
 StarrocksOnEksStack.EKSClusterName = StarrocksEKSCluster3A432E2B-bb3cea276eb24eb8a36a274fcee16316
 StarrocksOnEksStack.FlinkCdcRepositoryUri = 436103886277.dkr.ecr.us-east-1.amazonaws.com/flink-cdc-pipeline
+这里要增加一个ECR的地址输出
 StarrocksOnEksStack.StarrocksEKSClusterConfigCommand324EAEDF = aws eks update-kubeconfig --name StarrocksEKSCluster3A432E2B-bb3cea276eb24eb8a36a274fcee16316 --region us-east-1 --role-arn arn:aws:iam::436103886277:role/StarrocksOnEksStack-EksMastersRoleD1AE213C-E95o0FOZ5SKh
 StarrocksOnEksStack.StarrocksEKSClusterGetTokenCommand3DE05C2D = aws eks get-token --cluster-name StarrocksEKSCluster3A432E2B-bb3cea276eb24eb8a36a274fcee16316 --region us-east-1 --role-arn arn:aws:iam::436103886277:role/StarrocksOnEksStack-EksMastersRoleD1AE213C-E95o0FOZ5SKh
 StarrocksOnEksStack.WriterEndpoint = starrocksoneksstack-auroracluster23d869c0-3dezvmq1vogu.cluster-co2wcr3kjcuz.us-east-1.rds.amazonaws.com
@@ -58,6 +55,14 @@ Stack ARN:
 arn:aws:cloudformation:us-east-1:436103886277:stack/StarrocksOnEksStack/6aad7a70-1f64-11f0-8445-12a81ae52fad
 ```
 
+
+* 记录以上CDK输出，其中：
+    *  StarrocksOnEksStack.BucketName：后续存放数据集的S3桶
+    *  StarrocksOnEksStack.WriterEndpoint：Aurora Cluster的写入Endpoint，后续数据会同步写入到Aurora
+    *  StarrocksOnEksStack.EKSClusterName：EKS集群ID
+    *  StarrocksOnEksStack.StarrocksEKSClusterConfigCommand324EAEDF：您的EKS访问权限配置命令
+ 
+  
 ### 准备基础数据
 * 配置相关环境变量
 ```
@@ -73,7 +78,7 @@ Admin:~/environment $ python3 load_events.py
 ### 配置EKS
 * 配置EKS访问权限
 ```
-Admin:~/environment/starrocks-on-eks-workshop (main) $ aws eks update-kubeconfig --name StarrocksEKSCluster3A432E2B-bb3cea276eb24eb8a36a274fcee16316 --region us-east-1 --role-arn arn:aws:iam::436103886277:role/StarrocksOnEksStack-EksMastersRoleD1AE213C-E95o0FOZ5SKh
+Admin:~/environment $ 上述CDK输出的EKS集群访问权限配置命令（StarrocksOnEksStack.StarrocksEKSClusterConfigCommand）
 ```
 * 配置环境变量
 ```
@@ -93,7 +98,7 @@ eksctl utils associate-iam-oidc-provider \
 ```
 Admin:~/environment $ kubectl get configmap aws-auth -n kube-system -o yaml > aws-auth-configmap.yaml
 
-这里有问题：Admin:~/environment $ kubectl patch configmap aws-auth -n kube-system --patch '{"data": {"mapUsers": "- userarn: arn:aws:iam::436103886277:user/Sean\n  username: Sean\n  groups:\n    - system:masters"}}'
+这里有问题，要确认workshop账号是什么user：Admin:~/environment $ kubectl patch configmap aws-auth -n kube-system --patch '{"data": {"mapUsers": "- userarn: arn:aws:iam::436103886277:user/Sean\n  username: Sean\n  groups:\n    - system:masters"}}'
 ```
 
 
