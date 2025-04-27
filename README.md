@@ -719,6 +719,8 @@ Admin:~/environment/flink-cdc $ envsubst < flinkcdc-configmap.yaml | kubectl app
 Admin:~/environment/flink-cdc $ envsubst < flink-cdc-pipeline-job.yaml | kubectl apply -f -
 ```
 
+## 游戏数据分析
+
 
 
 
