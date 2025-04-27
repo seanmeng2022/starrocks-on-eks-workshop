@@ -215,6 +215,14 @@ Admin:~/environment $ export STARROCKS_LOAD_HOST=<a-starrocks-with-fe-proxy-fe-p
 
 
 ## 部署存算分离模式Starrocks集群（Optional）
+
+### 清除前期资源
+如果您的集群中已经部署了第二章存算一体Starrocks集群，可以先将资源清除。
+* 删除Starrocks集群
+```
+Admin:~/environment/starrocks-on-eks-workshop (main) $ kubectl delete -f starrocks_cluster_with_fe_proxy.yaml
+Admin:~/environment/starrocks-on-eks-workshop/flink-cdc (main) $ kubectl delete -f flink-cdc-pipeline-job.yaml
+```
 ### 部署集群
 ```
 Admin:~/environment (main) $ kubectl apply -f starrocks_cluster_shared_data_mode.yaml 
@@ -712,15 +720,6 @@ Admin:~/environment/flink-cdc $ envsubst < flink-cdc-pipeline-job.yaml | kubectl
 ```
 
 
-
-## 存算分离部署模式
-### 清除前期资源
-如果您的集群中已经部署了第二章存算一体Starrocks集群，可以先将资源清除。
-* 删除Starrocks集群
-```
-Admin:~/environment/starrocks-on-eks-workshop (main) $ kubectl delete -f starrocks_cluster_with_fe_proxy.yaml
-Admin:~/environment/starrocks-on-eks-workshop/flink-cdc (main) $ kubectl delete -f flink-cdc-pipeline-job.yaml
-```
 
 
 
