@@ -722,6 +722,7 @@ Admin:~/environment/flink-cdc $ envsubst < flink-cdc-pipeline-job.yaml | kubectl
 ## 游戏数据分析
 ### 利用Bitmap实现游戏用户圈选
 * 创建用户标签表
+首先需要创建一个用户标签表，将各种用户特征转换为bitmap标记：
 ```
 CREATE TABLE user_tags (
     tag_date DATE,
