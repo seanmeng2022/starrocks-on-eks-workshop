@@ -719,6 +719,17 @@ Admin:~/environment/flink-cdc $ envsubst < flinkcdc-configmap.yaml | kubectl app
 Admin:~/environment/flink-cdc $ envsubst < flink-cdc-pipeline-job.yaml | kubectl apply -f -
 ```
 
+* 您可以通过如下方式访问Flink UI，以查看导入任务完成情况
+```
+Admin:~/environment/starrocks-on-eks-workshop/flink-cdc (main) $ kubectl port-forward svc/flink-cdc-pipeline-job-rest 8081:8081 -n flinkcdc
+
+点击cloud9 IDE页面的Preview - Preview Running Application选项，访问当前url的8081端口
+
+```
+
+
+
+
 ## 游戏数据分析
 ### 利用Bitmap实现游戏用户圈选
 * 创建用户标签表
