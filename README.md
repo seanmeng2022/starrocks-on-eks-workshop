@@ -700,12 +700,12 @@ Admin:~/environment $ aws ecr get-login-password --region us-east-1 | docker log
 ```
 * 构建Docker镜像
 ```
-Admin:~/environment/flink-cdc/docker $ docker build -t $ECR_ID:latest .
+Admin:~/environment/flink-cdc/docker $ docker build -t $ECR_ID/flink-cdc-pipeline:latest .
 ```
 
 * 上传Docker镜像
 ```
-Admin:~/environment/flink-cdc/docker $ docker push $ECR_ID:latest
+Admin:~/environment/flink-cdc/docker $ docker push $ECR_ID/flink-cdc-pipeline:latest
 ```
 * 创建Flink-CDC ConfigMap
 ```
