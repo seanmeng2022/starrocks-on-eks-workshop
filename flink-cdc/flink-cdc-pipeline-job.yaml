@@ -10,6 +10,10 @@ spec:
     state.checkpoints.dir: 'file:///tmp/checkpoints'
     state.savepoints.dir: 'file:///tmp/savepoints'
     kubernetes.rest-service.exposed.type: LoadBalancer
+    # 配置重启策略
+    execution.restart-strategy: fixed-delay
+    execution.restart-strategy.fixed-delay.attempts: 3
+    execution.restart-strategy.fixed-delay.delay: 30s
   flinkVersion: v1_18
   image: '${ECR_ID}/flink-cdc-pipeline:latest'
   imagePullPolicy: Always
@@ -25,8 +29,8 @@ spec:
   jobManager:
     replicas: 1
     resource:
-      cpu: 1
-      memory: 1024m
+      cpu: 2
+      memory: 2048m
   podTemplate:
     apiVersion: v1
     kind: Pod
@@ -45,5 +49,5 @@ spec:
   serviceAccount: flink
   taskManager:
     resource:
-      cpu: 1
-      memory: 1024m
+      cpu: 2
+      memory: 2048m
