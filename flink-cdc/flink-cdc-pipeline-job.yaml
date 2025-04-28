@@ -11,7 +11,7 @@ spec:
     state.savepoints.dir: 'file:///tmp/savepoints'
     kubernetes.rest-service.exposed.type: LoadBalancer
   flinkVersion: v1_18
-  image: '${ECR_ID}:latest'
+  image: '${ECR_ID}/flink-cdc-pipeline:latest'
   imagePullPolicy: Always
   job:
     args:
