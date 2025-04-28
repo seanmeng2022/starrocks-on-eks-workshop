@@ -720,14 +720,114 @@ Admin:~/environment/flink-cdc $ envsubst < flink-cdc-pipeline-job.yaml | kubectl
 ```
 
 ## 游戏数据分析
+### 利用Bitmap实现游戏用户圈选
+* 创建用户标签表
+```
+CREATE TABLE user_tags (
+    tag_date DATE,
+    tag_name VARCHAR(64),
+    user_bitmap BITMAP BITMAP_UNION
+) ENGINE = OLAP
+AGGREGATE KEY(tag_date, tag_name)
+DISTRIBUTED BY HASH(tag_name) BUCKETS 10;
+```
+
+* 生成用户标签Bitmap
+```
+-- 插入性别标签
+INSERT INTO user_tags (tag_date, tag_name, user_bitmap)
+SELECT CURRENT_DATE() AS tag_date, 'gender_male' AS tag_name, TO_BITMAP(user_id) AS user_bitmap
+FROM user_profile
+WHERE gender = '男'
+UNION ALL
+SELECT CURRENT_DATE() AS tag_date, 'gender_female' AS tag_name, TO_BITMAP(user_id) AS user_bitmap
+FROM user_profile
+WHERE gender = '女';
+
+-- 插入年龄段标签
+INSERT INTO user_tags (tag_date, tag_name, user_bitmap)
+SELECT CURRENT_DATE() AS tag_date, 'age_18_to_24' AS tag_name, TO_BITMAP(user_id) AS user_bitmap
+FROM user_profile
+WHERE age BETWEEN 18 AND 24
+UNION ALL
+SELECT CURRENT_DATE() AS tag_date, 'age_25_to_34' AS tag_name, TO_BITMAP(user_id) AS user_bitmap
+FROM user_profile
+WHERE age BETWEEN 25 AND 34
+UNION ALL
+SELECT CURRENT_DATE() AS tag_date, 'age_35_plus' AS tag_name, TO_BITMAP(user_id) AS user_bitmap
+FROM user_profile
+WHERE age >= 35;
+
+-- 插入VIP等级标签
+INSERT INTO user_tags (tag_date, tag_name, user_bitmap)
+SELECT CURRENT_DATE() AS tag_date, CONCAT('vip_level_', vip_level) AS tag_name, TO_BITMAP(user_id) AS user_bitmap
+FROM user_profile
+GROUP BY vip_level;
+
+-- 插入活跃用户标签（最近7天有登录）
+INSERT INTO user_tags (tag_date, tag_name, user_bitmap)
+SELECT CURRENT_DATE() AS tag_date, 'active_last_7days' AS tag_name, TO_BITMAP(user_id) AS user_bitmap
+FROM user_login
+WHERE login_time >= DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY);
+
+-- 插入付费用户标签（有过任何交易记录）
+INSERT INTO user_tags (tag_date, tag_name, user_bitmap)
+SELECT CURRENT_DATE() AS tag_date, 'has_payment' AS tag_name, TO_BITMAP(user_id) AS user_bitmap
+FROM payment_transactions
+GROUP BY user_id;
+
+-- 插入高级玩家标签（游戏等级30以上）
+INSERT INTO user_tags (tag_date, tag_name, user_bitmap)
+SELECT CURRENT_DATE() AS tag_date, 'high_level_player' AS tag_name, TO_BITMAP(user_id) AS user_bitmap
+FROM game_process
+WHERE level >= 30;
+```
 
 
-
-
-
-
-
-
+* 简单圈选示例
+```
+-- 查询"男性且VIP等级大于等于1"的用户数量
+SELECT 
+    BITMAP_COUNT(BITMAP_AND(a.user_bitmap, b.user_bitmap)) AS user_count
+FROM 
+    user_tags a JOIN user_tags b
+    ON a.tag_date = b.tag_date
+WHERE 
+    a.tag_date = CURRENT_DATE()
+    AND a.tag_name = 'gender_male' 
+    AND b.tag_name IN ('vip_level_1', 'vip_level_2')
+    AND b.tag_date = CURRENT_DATE();
+```
+* 复杂圈选示例
+```
+-- 查询"35岁以上女性且是高级玩家且最近7天活跃"的用户ID列表
+WITH target_users AS (
+    SELECT 
+        BITMAP_AND(
+            BITMAP_AND(a.user_bitmap, b.user_bitmap),
+            BITMAP_AND(c.user_bitmap, d.user_bitmap)
+        ) AS result_bitmap
+    FROM 
+        user_tags a, 
+        user_tags b,
+        user_tags c,
+        user_tags d
+    WHERE 
+        a.tag_date = CURRENT_DATE()
+        AND b.tag_date = CURRENT_DATE()
+        AND c.tag_date = CURRENT_DATE()
+        AND d.tag_date = CURRENT_DATE()
+        AND a.tag_name = 'gender_female'
+        AND b.tag_name = 'age_35_plus'
+        AND c.tag_name = 'high_level_player'
+        AND d.tag_name = 'active_last_7days'
+)
+SELECT 
+    BITMAP_TO_STRING(result_bitmap) AS user_ids,
+    BITMAP_COUNT(result_bitmap) AS user_count
+FROM 
+    target_users;
+```
 
 
 
