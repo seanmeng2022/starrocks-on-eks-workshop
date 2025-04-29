@@ -9,7 +9,7 @@ spec:
     classloader.resolve-order: parent-first
     state.checkpoints.dir: 'file:///tmp/checkpoints'
     state.savepoints.dir: 'file:///tmp/savepoints'
-    kubernetes.rest-service.exposed.type: LoadBalancer
+    kubernetes.rest-service.exposed.type: ClusterIP
     # 配置重启策略
     execution.restart-strategy: fixed-delay
     execution.restart-strategy.fixed-delay.attempts: 3
