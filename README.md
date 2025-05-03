@@ -784,7 +784,8 @@ GROUP BY vip_level;
 INSERT INTO user_tags (tag_date, tag_name, user_bitmap)
 SELECT CURRENT_DATE() AS tag_date, 'active_last_7days' AS tag_name, TO_BITMAP(user_id) AS user_bitmap
 FROM user_login
-WHERE login_time >= DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY);
+WHERE login_time >= DATE_SUB('2025-04-23', INTERVAL 7 DAY);
+
 
 -- 插入付费用户标签（有过任何交易记录）
 INSERT INTO user_tags (tag_date, tag_name, user_bitmap)
@@ -817,7 +818,12 @@ WHERE
 * 复杂圈选示例
 ```
 -- 查询"35岁以上女性且是高级玩家且最近7天活跃"的用户ID列表
-WITH target_users AS (
+WITH latest_date AS (
+    SELECT MAX(tag_date) AS max_date
+    FROM user_tags
+    WHERE tag_name IN ('gender_female', 'age_35_plus', 'high_level_player', 'active_last_7days')
+),
+target_users AS (
     SELECT 
         BITMAP_AND(
             BITMAP_AND(a.user_bitmap, b.user_bitmap),
@@ -827,12 +833,13 @@ WITH target_users AS (
         user_tags a, 
         user_tags b,
         user_tags c,
-        user_tags d
+        user_tags d,
+        latest_date ld
     WHERE 
-        a.tag_date = CURRENT_DATE()
-        AND b.tag_date = CURRENT_DATE()
-        AND c.tag_date = CURRENT_DATE()
-        AND d.tag_date = CURRENT_DATE()
+        a.tag_date = ld.max_date
+        AND b.tag_date = ld.max_date
+        AND c.tag_date = ld.max_date
+        AND d.tag_date = ld.max_date
         AND a.tag_name = 'gender_female'
         AND b.tag_name = 'age_35_plus'
         AND c.tag_name = 'high_level_player'
