@@ -1,0 +1,62 @@
+# 数据表字段说明
+
+## game_events表
+| 字段名 | 数据类型 | 描述 |
+| ------ | -------- | ---- |
+| event_id | 整数 | 事件ID，主键 |
+| user_id | 整数 | 用户ID，外键关联users_profile表 |
+| event_time | 日期时间 | 事件发生时间 |
+| event_type | 字符串 | 事件类型，如LEVEL_COMPLETE、LEVEL_START等 |
+| event_detail | 字符串 | 事件详细描述 |
+| level_id | 整数 | 关卡ID |
+| result | 字符串 | 事件结果，如SUCCESS等 |
+| duration | 整数 | 事件持续时间(秒) |
+
+## game_process表
+| 字段名 | 数据类型 | 描述 |
+| ------ | -------- | ---- |
+| progress_id | 整数 | 进度ID，主键 |
+| user_id | 整数 | 用户ID，外键关联users_profile表 |
+| level | 整数 | 用户当前关卡 |
+| experience | 整数 | 用户经验值 |
+| game_coins | 整数 | 游戏金币数量 |
+| diamonds | 整数 | 游戏钻石数量 |
+| update_time | 日期时间 | 数据更新时间 |
+| total_play_time | 整数 | 总游戏时长(秒) |
+
+## payment_transactions表
+| 字段名 | 数据类型 | 描述 |
+| ------ | -------- | ---- |
+| transaction_id | 整数 | 交易ID，主键 |
+| user_id | 整数 | 用户ID，外键关联users_profile表 |
+| transaction_time | 日期时间 | 交易时间 |
+| amount | 浮点数 | 交易金额 |
+| payment_method | 字符串 | 支付方式 |
+| currency | 字符串 | 货币类型 |
+| item_id | 整数 | 商品ID |
+| item_name | 字符串 | 商品名称 |
+| item_type | 字符串 | 商品类型 |
+
+## users_login表
+| 字段名 | 数据类型 | 描述 |
+| ------ | -------- | ---- |
+| login_id | 整数 | 登录ID，主键 |
+| user_id | 整数 | 用户ID，外键关联users_profile表 |
+| login_time | 日期时间 | 登录时间 |
+| logout_time | 日期时间 | 登出时间 |
+| session_length | 整数 | 会话长度(秒) |
+| ip_address | 字符串 | 用户IP地址 |
+| device_id | 字符串 | 设备唯一标识符 |
+
+## users_profile表
+| 字段名 | 数据类型 | 描述 |
+| ------ | -------- | ---- |
+| user_id | 整数 | 用户ID，主键 |
+| register_time | 日期时间 | 注册时间 |
+| channel | 字符串 | 注册渠道 |
+| device_type | 字符串 | 设备类型 |
+| os_version | 字符串 | 操作系统版本 |
+| region | 字符串 | 用户所在地区 |
+| gender | 字符串 | 用户性别 |
+| age | 整数 | 用户年龄 |
+| vip_level | 整数 | 用户VIP等级 |
