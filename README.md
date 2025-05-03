@@ -772,9 +772,13 @@ WHERE age >= 35;
 
 -- 插入VIP等级标签
 INSERT INTO user_tags (tag_date, tag_name, user_bitmap)
-SELECT CURRENT_DATE() AS tag_date, CONCAT('vip_level_', vip_level) AS tag_name, TO_BITMAP(user_id) AS user_bitmap
+SELECT 
+    CURRENT_DATE() AS tag_date, 
+    CONCAT('vip_level_', vip_level) AS tag_name, 
+    BITMAP_UNION(TO_BITMAP(user_id)) AS user_bitmap
 FROM user_profile
 GROUP BY vip_level;
+
 
 -- 插入活跃用户标签（最近7天有登录）
 INSERT INTO user_tags (tag_date, tag_name, user_bitmap)
