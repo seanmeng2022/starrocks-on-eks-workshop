@@ -676,7 +676,7 @@ PROPERTIES
 MySQL [workshop_db_s3]> SELECT * FROM information_schema.loads WHERE LABEL = 'game_events';
 ```
 
-### Mysql实时同步数据到Starrocks
+### Mysql实时同步数据到Starrocks（Optional）
 * 安装cert manger
 ```
 Admin:~/environment $ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.8.2/cert-manager.yaml
