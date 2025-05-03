@@ -230,6 +230,6 @@ class StarrocksOnEksStack(Stack):
         )
         
         # Output the ECR repository URI
-        CfnOutput(self, "FlinkCdcRepositoryUri",
-            value=ecr_repository.repository_uri
+        CfnOutput(self, "EcrDomain",
+            value=Fn.select(0, Fn.split("/", ecr_repository.repository_uri))
         )
