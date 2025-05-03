@@ -791,7 +791,7 @@ GROUP BY user_id;
 -- 插入高级玩家标签（游戏等级30以上）
 INSERT INTO user_tags (tag_date, tag_name, user_bitmap)
 SELECT CURRENT_DATE() AS tag_date, 'high_level_player' AS tag_name, TO_BITMAP(user_id) AS user_bitmap
-FROM game_process
+FROM game_progress
 WHERE level >= 30;
 ```
 
