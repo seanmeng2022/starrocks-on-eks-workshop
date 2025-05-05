@@ -5,7 +5,7 @@ serviceAccounts:
             eks.amazonaws.com/role-arn: "arn:aws:iam::${AWS_Account_ID}:role/amp-iamproxy-ingest-role"
 server:
     remoteWrite:
-        - url: ${AMP_ENDPOINT}
+        - url: ${AMP_ENDPOINT}/api/v1/remote_write
           sigv4:
             region: us-east-1
           queue_config:
