@@ -850,9 +850,23 @@ FROM
     target_users;
 ```
 
+## 可视化监控
+* 添加Prometheus社区Helm仓库
+```
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+```
 
-
-
-
+* 配置环境变量，生成配置文件
+```
+export AMP_ENDPOINT=<您的AMP Endpoint>
+envsubst < prometheus-values.yaml.template > prometheus-values.yaml
+```
+* 安装prometheus server
+```
+helm install prometheus prometheus-community/prometheus \
+  -n prometheus \
+  -f prometheus-values.yaml
+```
 
 
