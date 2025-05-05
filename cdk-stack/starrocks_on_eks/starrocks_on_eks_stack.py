@@ -12,6 +12,10 @@ from aws_cdk import (
     Tags,
     aws_iam as iam,
     aws_ecr as ecr,
+    aws_aps as aps,
+    aws_grafana as grafana,
+    aws_secretsmanager as secretsmanager,
+    CfnJson,
     Fn
 )
 
@@ -136,6 +140,7 @@ class StarrocksOnEksStack(Stack):
             security_group=eks_security_group,
             masters_role=masters_role
         )
+        
 
 
         # Add managed node group
@@ -194,6 +199,110 @@ class StarrocksOnEksStack(Stack):
                 rds.ClusterInstance.serverless_v2("reader1", scale_with_writer=True)
             ]
         )
+        
+        
+        # ========== 添加 AWS Managed Prometheus ==========
+        # 创建 Amazon Managed Service for Prometheus 工作区
+        prometheus_workspace = aps.CfnWorkspace(self, "StarrocksPrometheusWorkspace",
+            alias="starrocks-prometheus"
+        )
+        
+        
+        # First create the prometheus namespace
+        prometheus_namespace = eks_cluster.add_manifest("PrometheusNamespace", {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "name": "prometheus"
+            }
+        })
+        
+        # 创建 Prometheus 远程写入策略
+        prometheus_policy = iam.Policy(self, "AmazonPrometheusRemoteWritePolicy",
+            statements=[
+                iam.PolicyStatement(
+                    effect=iam.Effect.ALLOW,
+                    actions=[
+                        "aps:RemoteWrite",
+                        "aps:GetSeries",
+                        "aps:GetLabels",
+                        "aps:GetMetricMetadata"
+                    ],
+                    resources=[prometheus_workspace.attr_arn]
+                )
+            ]
+        )
+        
+        # 获取 OIDC 提供者信息
+        oidc_provider_arn = eks_cluster.open_id_connect_provider.open_id_connect_provider_arn
+        oidc_provider = eks_cluster.cluster_open_id_connect_issuer.replace("https://", "")
+        
+ 
+        # 创建 CfnJson 对象来处理条件
+        condition_json = CfnJson(self, "ConditionJson", 
+            value={
+                f"{oidc_provider}:sub": "system:serviceaccount:prometheus:amp-iamproxy-ingest-service-account"
+            }
+        )
+
+        # 创建 Prometheus 采集 IAM 角色
+        prometheus_role = iam.Role(self, "AmpIamproxyIngestRole",
+            role_name="amp-iamproxy-ingest-role",
+            assumed_by=iam.FederatedPrincipal(
+                federated=oidc_provider_arn,
+                conditions={
+                    "StringEquals": condition_json
+                },
+                assume_role_action="sts:AssumeRoleWithWebIdentity"
+            )
+        )
+        
+        # 附加策略到角色
+        prometheus_policy.attach_to_role(prometheus_role)
+
+        
+        
+        # ========== 添加 AWS Managed Grafana ==========
+        # 创建 Grafana 工作区
+        grafana_workspace = grafana.CfnWorkspace(self, "StarrocksGrafanaWorkspace",
+            account_access_type="CURRENT_ACCOUNT",
+            authentication_providers=["AWS_SSO"],
+            permission_type="SERVICE_MANAGED",
+            name="starrocks-grafana",
+            data_sources=["PROMETHEUS", "CLOUDWATCH"],
+            role_arn=masters_role.role_arn  # 使用主角色作为 Grafana 工作区角色
+        )
+        
+        # 创建安全组用于 Grafana 访问
+        grafana_sg = ec2.SecurityGroup(self, "GrafanaSecurityGroup",
+            vpc=vpc,
+            description="Security group for Grafana access"
+        )
+        
+        # 允许从 VPC CIDR 访问 Grafana 端口
+        grafana_sg.add_ingress_rule(
+            ec2.Peer.ipv4(vpc_cidr),
+            ec2.Port.tcp(3000),
+            "Allow Grafana access from VPC CIDR"
+        )
+        
+        # 输出 Prometheus 和 Grafana 相关信息
+        CfnOutput(self, "PrometheusWorkspaceId", 
+            value=prometheus_workspace.attr_workspace_id
+        )
+        
+        CfnOutput(self, "PrometheusEndpoint", 
+            value=f"https://aps-workspaces.{self.region}.amazonaws.com/workspaces/{prometheus_workspace.attr_workspace_id}"
+        )
+        
+        CfnOutput(self, "GrafanaWorkspaceId", 
+            value=grafana_workspace.attr_id
+        )
+        
+        CfnOutput(self, "GrafanaEndpoint", 
+            value=f"https://{grafana_workspace.attr_endpoint}"
+        )
+        
 
         # Output the cluster endpoint
         CfnOutput(self, "ClusterEndpoint",
