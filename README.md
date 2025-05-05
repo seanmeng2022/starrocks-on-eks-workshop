@@ -868,5 +868,16 @@ helm install prometheus prometheus-community/prometheus \
   -n prometheus \
   -f prometheus-values.yaml
 ```
-
+* 确认prometheus server安装成功
+```
+Admin:~/environment/starrocks-on-eks-workshop (main) $ kubectl get pod -n prometheus
+NAME                                                 READY   STATUS    RESTARTS   AGE
+prometheus-alertmanager-0                            1/1     Running   0          82s
+prometheus-kube-state-metrics-846ccb44b5-4m8vq       1/1     Running   0          82s
+prometheus-prometheus-node-exporter-8sv2s            1/1     Running   0          82s
+prometheus-prometheus-node-exporter-h8vbs            1/1     Running   0          82s
+prometheus-prometheus-node-exporter-plm48            1/1     Running   0          82s
+prometheus-prometheus-pushgateway-58b848df57-8nkx9   1/1     Running   0          82s
+prometheus-server-7d88f5ff45-qd8mq                   2/2     Running   0          82s
+```
 
