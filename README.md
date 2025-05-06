@@ -885,6 +885,7 @@ prometheus-server-7d88f5ff45-qd8mq                   2/2     Running   0        
 ### 配置AWS Managed Grafana
 * 在AWS控制台，导航至IAM Identity Center界面，点击add user
 <img width="1915" alt="image" src="https://github.com/user-attachments/assets/4f9ed697-dad6-4cb6-9336-0385e6df615d" />
+
 * 填写如下信息（确保您的邮箱可以正常接收邮件），一路点击Next，直到最后点击add user
 * 您会在邮箱中收到AWS IAM Identity Center的邀请邮件，点击Accept invitation后，修改user密码
 <img width="1356" alt="image" src="https://github.com/user-attachments/assets/1ba07652-b5aa-46c6-9e7a-f32d5de77c0c" />
@@ -892,6 +893,8 @@ prometheus-server-7d88f5ff45-qd8mq                   2/2     Running   0        
 <img width="1851" alt="image" src="https://github.com/user-attachments/assets/e71b4413-fccd-4c0c-b394-34c6b75af80f" />
 * 选中刚刚添加的user，然后点击Assign users and groups
 <img width="1860" alt="image" src="https://github.com/user-attachments/assets/a6815846-b671-4032-9567-e011ae9046e7" />
+* 将User权限改为admin
+<img width="1863" alt="image" src="https://github.com/user-attachments/assets/55c61cb3-fe93-4f31-8442-79cdba964a47" />
 * 返回Workspace页面，通过Grafana workspace URL登录Grafana控制台
 <img width="1881" alt="image" src="https://github.com/user-attachments/assets/1edf55f9-37f9-448c-beb7-e216eb1b227c" />
 
