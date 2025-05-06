@@ -898,6 +898,11 @@ prometheus-server-7d88f5ff45-qd8mq                   2/2     Running   0        
 * 返回Workspace页面，通过Grafana workspace URL登录Grafana控制台
 <img width="1881" alt="image" src="https://github.com/user-attachments/assets/1edf55f9-37f9-448c-beb7-e216eb1b227c" />
 * 添加data source
-<img width="1898" alt="image" src="https://github.com/user-attachments/assets/63b70381-7c2f-491d-ad8e-5b39edd9842d" />
-* 选择prometheus数据源，
+<img width="1871" alt="image" src="https://github.com/user-attachments/assets/d1c7e049-f69f-4bb3-9fec-d078906b8591" />
+* 下载官方Dashboard模板到本地
+https://starrocks-thirdparty.oss-cn-zhangjiakou.aliyuncs.com/StarRocks-Overview-24-new.json
+* 在Grafana Dashboards界面，选择导入dashboard模板
+<img width="1576" alt="image" src="https://github.com/user-attachments/assets/192fc354-7490-4cba-b8e8-f2b9676a2359" />
+
+
 
