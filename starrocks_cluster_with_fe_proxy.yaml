@@ -24,6 +24,9 @@ spec:
       type: LoadBalancer   # export fe service
       annotations:
         service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "8030"
+        prometheus.io/scrape: "true"
       ports:
       - name: query   # fill the name from the fe service ports
         nodePort: 32755
@@ -38,6 +41,13 @@ spec:
     requests:
       cpu: 4
       memory: 8Gi
+    service:
+      type: LoadBalancer   # export fe service
+      annotations:
+        service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "8040"
+        prometheus.io/scrape: "true"
   starRocksFeProxySpec:
     replicas: 2
     limits:
