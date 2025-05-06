@@ -889,7 +889,7 @@ prometheus-server-7d88f5ff45-qd8mq                   2/2     Running   0        
 <img width="1356" alt="image" src="https://github.com/user-attachments/assets/1ba07652-b5aa-46c6-9e7a-f32d5de77c0c" />
 * 在AWS控制台，导航至Amazon Grafana界面，进入workspace，点击Assign new user or group
 <img width="1851" alt="image" src="https://github.com/user-attachments/assets/e71b4413-fccd-4c0c-b394-34c6b75af80f" />
-* 选中刚刚添加的user，然后点击
+* 选中刚刚添加的user，然后点击Assign users and groups
 <img width="1860" alt="image" src="https://github.com/user-attachments/assets/a6815846-b671-4032-9567-e011ae9046e7" />
 
 
