@@ -890,19 +890,34 @@ prometheus-server-7d88f5ff45-qd8mq                   2/2     Running   0        
 * 您会在邮箱中收到AWS IAM Identity Center的邀请邮件，点击Accept invitation后，修改user密码
 
 <img width="1356" alt="image" src="https://github.com/user-attachments/assets/1ba07652-b5aa-46c6-9e7a-f32d5de77c0c" />
+
 * 在AWS控制台，导航至Amazon Grafana界面，进入workspace，点击Assign new user or group
+  
 <img width="1851" alt="image" src="https://github.com/user-attachments/assets/e71b4413-fccd-4c0c-b394-34c6b75af80f" />
+
 * 选中刚刚添加的user，然后点击Assign users and groups
+
 <img width="1860" alt="image" src="https://github.com/user-attachments/assets/a6815846-b671-4032-9567-e011ae9046e7" />
+
 * 将User权限改为admin
+
 <img width="1863" alt="image" src="https://github.com/user-attachments/assets/55c61cb3-fe93-4f31-8442-79cdba964a47" />
+
 * 返回Workspace页面，通过Grafana workspace URL登录Grafana控制台
+
 <img width="1881" alt="image" src="https://github.com/user-attachments/assets/1edf55f9-37f9-448c-beb7-e216eb1b227c" />
+
 * 添加data source
+
 <img width="1871" alt="image" src="https://github.com/user-attachments/assets/d1c7e049-f69f-4bb3-9fec-d078906b8591" />
+
 * 下载官方Dashboard模板到本地
+```
 https://github.com/StarRocks/starrocks/blob/main/extra/grafana/kubernetes/StarRocks-Overview-kubernetes-3.0.json
+```
+
 * 在Grafana Dashboards界面，选择导入dashboard模板
+
 <img width="1576" alt="image" src="https://github.com/user-attachments/assets/192fc354-7490-4cba-b8e8-f2b9676a2359" />
 
 
