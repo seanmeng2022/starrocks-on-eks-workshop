@@ -270,7 +270,6 @@ class StarrocksOnEksStack(Stack):
             permission_type="SERVICE_MANAGED",
             name="starrocks-grafana",
             data_sources=["PROMETHEUS", "CLOUDWATCH"],
-            role_arn=masters_role.role_arn  # 使用主角色作为 Grafana 工作区角色
         )
         
         # 创建安全组用于 Grafana 访问
