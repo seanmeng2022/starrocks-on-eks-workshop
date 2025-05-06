@@ -42,7 +42,6 @@ spec:
       cpu: 4
       memory: 8Gi
     service:
-      type: LoadBalancer   # export fe service
       annotations:
         service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
         prometheus.io/path: /metrics
