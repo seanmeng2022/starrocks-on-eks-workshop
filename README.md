@@ -60,18 +60,7 @@ StarrocksOnEksStack.WriterEndpoint = starrocksoneksstack-auroracluster23d869c0-3
     *  StarrocksOnEksStack.StarrocksEKSClusterConfigCommand324EAEDF：您的EKS访问权限配置命令
     *  StarrocksOnEksStack.EcrDomain：您的ECR镜像仓库地址
  
-  
-### 准备基础数据
-* 配置相关环境变量
-```
-Admin:~/environment $ export DB_USERNAME=admin
-Admin:~/environment $ export DB_PASSWORD=starrocks
-Admin:~/environment $ export DB_HOST=<您的aurora writer endpoint>
-```
-* 导入数据到Aurora Mysql
-```
-Admin:~/environment $ python3 load_events.py 
-```
+
 
 ### 配置EKS
 * 配置EKS访问权限
@@ -675,6 +664,19 @@ MySQL [workshop_db_s3]> SELECT * FROM information_schema.loads WHERE LABEL = 'ga
 ```
 
 ### Mysql实时同步数据到Starrocks（Optional）
+  
+#### 准备基础数据
+* 配置相关环境变量
+```
+Admin:~/environment $ export DB_USERNAME=admin
+Admin:~/environment $ export DB_PASSWORD=starrocks
+Admin:~/environment $ export DB_HOST=<您的aurora writer endpoint>
+```
+* 导入数据到Aurora Mysql
+```
+Admin:~/environment $ python3 load_events.py 
+```
+
 * 安装cert manger
 ```
 Admin:~/environment $ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.8.2/cert-manager.yaml
