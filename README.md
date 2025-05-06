@@ -897,7 +897,7 @@ prometheus-server-7d88f5ff45-qd8mq                   2/2     Running   0        
 <img width="1863" alt="image" src="https://github.com/user-attachments/assets/55c61cb3-fe93-4f31-8442-79cdba964a47" />
 * 返回Workspace页面，通过Grafana workspace URL登录Grafana控制台
 <img width="1881" alt="image" src="https://github.com/user-attachments/assets/1edf55f9-37f9-448c-beb7-e216eb1b227c" />
-
-
-
+* 添加data source
+<img width="1898" alt="image" src="https://github.com/user-attachments/assets/63b70381-7c2f-491d-ad8e-5b39edd9842d" />
+* 选择prometheus数据源，
 
