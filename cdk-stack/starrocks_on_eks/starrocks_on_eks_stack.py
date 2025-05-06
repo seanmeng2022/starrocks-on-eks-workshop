@@ -263,15 +263,39 @@ class StarrocksOnEksStack(Stack):
         
         
         # ========== 添加 AWS Managed Grafana ==========
-        # 创建 Grafana 工作区
+        # Create a role with proper permissions for Grafana
+        grafana_role = iam.Role(self, "GrafanaWorkspaceRole",
+            assumed_by=iam.ServicePrincipal("grafana.amazonaws.com"),
+            managed_policies=[
+                iam.ManagedPolicy.from_aws_managed_policy_name("AmazonPrometheusQueryAccess"),
+                iam.ManagedPolicy.from_aws_managed_policy_name("CloudWatchReadOnlyAccess")
+            ]
+        )
+        
+        # Add specific permission for the Prometheus workspace
+        grafana_role.add_to_policy(iam.PolicyStatement(
+            effect=iam.Effect.ALLOW,
+            actions=[
+                "aps:QueryMetrics", 
+                "aps:GetLabels", 
+                "aps:GetMetricMetadata", 
+                "aps:GetSeries",
+                "aps:ListWorkspaces",  # 添加列出工作区的权限
+                "aps:DescribeWorkspace"  # 添加描述工作区的权限
+            ],
+            resources=["*"]
+        ))
+        
+        # Create Grafana workspace with the custom role
         grafana_workspace = grafana.CfnWorkspace(self, "StarrocksGrafanaWorkspace",
             account_access_type="CURRENT_ACCOUNT",
             authentication_providers=["AWS_SSO"],
-            permission_type="SERVICE_MANAGED",
+            permission_type="SERVICE_MANAGED",  # Still using SERVICE_MANAGED
             name="starrocks-grafana",
             data_sources=["PROMETHEUS", "CLOUDWATCH"],
+            role_arn=grafana_role.role_arn  # Using the dedicated Grafana role
         )
-        
+
         # 创建安全组用于 Grafana 访问
         grafana_sg = ec2.SecurityGroup(self, "GrafanaSecurityGroup",
             vpc=vpc,
